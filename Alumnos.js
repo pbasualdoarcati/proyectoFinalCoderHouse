@@ -1,4 +1,3 @@
-/*
 class Alumnos {
     constructor(){
         this.nombre = [];
@@ -60,4 +59,3 @@ promedio()
 
 console.log(alumno1);
 console.log(alumno1.nota);
-*/
