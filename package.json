@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "sass": "^1.49.7"
+  },
+  "name": "proyectoalter",
+  "version": "1.0.0",
+  "description": "Proyecto final curso de javascript de Coder House",
+  "main": "conversor.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass-compile": "sass styles/sass/:styles/css/",
+    "sass-watch": "sass --watch styles/sass:styles/css"
+  },
+  "author": "Pablo G. R. Basualdo Arcati",
+  "license": "ISC"
+}

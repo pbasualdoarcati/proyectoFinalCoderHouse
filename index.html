@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/css/index.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
+            <img src="https://www.greatplacetowork.com.ar/images/coderhouse-logo.png" alt="" width="30" height="24">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+<!-- Ingreso de alumnos -->
+<div class="title container">
+  <h1>Sistema de gestión de alumnos</h1> 
+</div>
+<div class="subtitulo">
+  <h2>División por materias</h2>
+  <form action="" class="search">
+    <div class="box">
+      <div class="container-1">
+        <input type="search" id="search" placeholder="Buscar alumno..." />
+        <button class="icon"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+    
+</div>
+<div class="alumno container">
+  <div class="row alumnos alumnos_subtitulo m-2">
+    <div class="col-sm m-1 p-2 border border-dark">
+      Nombre
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Apellido
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Materia
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Primer Parcial
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Segundo Parcial
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Tercer Parcial
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Promedio
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      Estado
+    </div>
+    <div class="col-sm m-1 p-2 border border-dark text-center">
+      <button>Resultado</button>
+    </div>
+    <ul class="row items">
+      <li class="col-sm border" name="name">Juan</li>
+      <li class="col-sm border" name="lastname">Perez</li>
+      <li class="col-sm border" name="subject">Matemática</li>
+      <li class="col-sm border" name="subject1">10</li>
+      <li class="col-sm border" name="subject2">5</li>
+      <li class="col-sm border" name="subject3">5</li>
+      <li class="col-sm border" name="average"></li>
+      <li class="col-sm border" name="state"></li>
+    </ul>
+  </div>
+  
+</div>
+
+
+
+
+
+
+
+
+    
+    <script src="/Alumnos.js"></script>
+</body>
+</html>
