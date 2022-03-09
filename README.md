@@ -2,13 +2,18 @@
 
 # Sistema de gestión de alumnos por materias
 
-En esta primera entrega, se deben hacer entradas con prompt () y salidas con alert() o console.log(),
-resultando suficiente para empezar a pensar el proceso a simular en términos de entradas, variables,
-estructuras, metodos, funciones y salidas.
-En la misma se ingresa por prompt() el nombre, apellido del alumno, la materia y las notas que
-obtuvo en los distintos parciales, simulando que el usuario hace click en el botón adecuado, 
-este indicara el promedio que obtuvo el alumno y si el estado de la materia es aprobado o no de acuerdo
-al promedio.
-Tambien, se simula una busqueda de alumno, que en caso de no encontrarlo se dará la opción para agregar
-los mismos datos que al principio.
-Se utilizan, objetos, arrays, arrow function, funciones de orden superior, condicionales y bucles.
+El simulador de gestión de alumnos es un proyecto del curso de JavaScript de Coder House
+en el mismo el usuario ingresara los valores de Nombre, Apellido, Materia y las notas que el supuesto
+alumno obtuvo en los tres parciales, al hacer click en el boton correspondiente, el sistema guardará
+en comunicación con la base de datos el nuevo alumno y automaticamente realizara un calculo de promedio
+y evaluación del resultado de dicho promedio para mostrar: 
+
+1) El resultado final del promedio 
+2) Si, el promedio es mayor a 6 el alumno se considera aprobado, caso contrario reprobado
+
+En proximas actualizaciones se realizara, filtración para buscar alumnos e inicio de sesión del personal autorizado.
+
+
+
+
+![image](https://user-images.githubusercontent.com/87046340/157549127-6fcc6038-b370-4776-8f8a-6f7fe87b8b29.png)
