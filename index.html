@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="/styles/css/index.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <title>Document</title>
+    <title>Sistema de Gestión de Alumnos</title>
 </head>
 <body>
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
             <img src="https://www.greatplacetowork.com.ar/images/coderhouse-logo.png" alt="" width="30" height="24">
@@ -23,6 +23,11 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 login">
+              <li class="nav-item">
+                <a class="nav-link active text-light" aria-current="page" href="#">Iniciar sesión</a>
               </li>
             </ul>
           </div>
@@ -43,47 +48,74 @@
       </div>
     </div>
   </form>
-    
+
 </div>
 <div class="alumno container">
-  <div class="row alumnos alumnos_subtitulo m-2">
-    <div class="col-sm m-1 p-2 border border-dark">
-      Nombre
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Apellido
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Materia
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Primer Parcial
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Segundo Parcial
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Tercer Parcial
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Promedio
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      Estado
-    </div>
-    <div class="col-sm m-1 p-2 border border-dark text-center">
-      <button>Resultado</button>
-    </div>
-    <ul class="row items" id="studient">
-      <li class="col-sm border" id="name" name="name"></li>
-      <li class="col-sm border" id="lastname" name="lastname"></li>
-      <li class="col-sm border" id="subject" name="subject"></li>
-      <li class="col-sm border" id="subject1" name="subject1"></li>
-      <li class="col-sm border" id="subject2" name="subject2"></li>
-      <li class="col-sm border" id="subject3" name="subject3"></li>
-      <li class="col-sm border" id="average" name="average"></li>
-      <li class="col-sm border" id="state" name="state"></li>
+
+  <!-- Input para agregar alumnos -->
+
+  <div class="container alumnos_subtitulo">
+    <form action="" class="alumnos_formulario" id="formularioAlumno">
+      <div class="container alumnos_modulo1">
+
+        <label for="nombre" class="form-label col-">Nombre del Alumno</label>
+        <input type="text" class="form-control col-" id="nombre" placeholder="Ingrese el nombre" name="nombre" required>
+        
+        <label for="apellido" class="form-label col-">Apellido del Alumno</label>
+        <input type="text" class="form-control col-" id="apellido" placeholder="Ingrese el apellido" name="apellido" required>
+        
+        <label for="materia" class="form-label col-">Materia</label>
+        <input type="text" class="form-control col-" id="materia" placeholder="Ingrese el materia" name="materia" required>
+        
+      </div>
+      <div class="container alumnos_modulo2">
+
+        <label for="nota1" class="form-label col-">Nota del Primer parcial</label>
+        <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10" name="nota1" required>
+        
+        <label for="nota2" class="form-label col-">Nota del Segundo parcial</label>
+        <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10" name="nota2" required>
+        
+        <label for="nota3" class="form-label col-">Nota del Tercer parcial</label>
+        <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10" name="nota3" required>
+      </div>
+      <img src="/src/images/logo.png" alt="logo escuela" class="logo">
+      </form>
+      <div class="button">
+        <button class="btn btn-secondary rounded-pill m-2" onclick="agregarAlumnos()">Agregar Alumno y aplicar resultado</button>
+        <!-- <button class="btn btn-secondary rounded-pill" onclick="resultado()">Resultado</button> -->
+      </div>
+      
+  </div>
+    
+<!-- Resultado del ingreso -->
+
+  <div class="row alumnos m-2" id="alumnos">
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Nombre</li>
     </ul>
+    <ul class="col-sm border border-secondary">
+     <li class="col-sm itemsTitulo">Apellido</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Materia</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Primer Parcial</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Segundo Parcial</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Tercer Parcial</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Promedio</li>
+    </ul>
+    <ul class="col-sm border border-secondary">
+      <li class="col-sm itemsTitulo">Estado</li>
+    </ul>
+
   </div>
   
 </div>

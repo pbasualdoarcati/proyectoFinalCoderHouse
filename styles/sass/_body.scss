@@ -2,6 +2,10 @@ body{
     background-color: #3f3e3e;
     color: #fff;
 }
+.login{
+    position: relative;
+    left: 44%;
+}
 .title{
     display: flex;
     flex-direction: column;
@@ -68,12 +72,32 @@ body{
       background: white;
     }
 }
+
+.alumnos_formulario{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    .logo{
+        width: 13%;
+        position: absolute;
+        left: 70%;
+        top: 18%
+    }
+}
 .alumnos{
     border: 1px solid black;
 }
-.items{
+.button{
+    margin-top: 12px;
+    margin-left: 125px;
+}
+.itemsTitulo{
     position: relative;
     left: 6px;
     list-style: none;
-    width: 90%;
+}
+.items{
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }

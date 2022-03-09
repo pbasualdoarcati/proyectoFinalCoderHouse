@@ -8,6 +8,11 @@ body {
   color: #fff;
 }
 
+.login {
+  position: relative;
+  left: 44%;
+}
+
 .title {
   display: flex;
   flex-direction: column;
@@ -73,15 +78,37 @@ body {
   background: white;
 }
 
+.alumnos_formulario {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+.alumnos_formulario .logo {
+  width: 13%;
+  position: absolute;
+  left: 70%;
+  top: 18%;
+}
+
 .alumnos {
   border: 1px solid black;
 }
 
-.items {
+.button {
+  margin-top: 12px;
+  margin-left: 125px;
+}
+
+.itemsTitulo {
   position: relative;
   left: 6px;
   list-style: none;
-  width: 90%;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /*# sourceMappingURL=index.css.map */
