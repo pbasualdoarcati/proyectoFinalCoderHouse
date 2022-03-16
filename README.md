@@ -38,5 +38,5 @@ To achieve this second section, the user must press the "Save" button so that it
 In future updates, filtering to search for students and login of authorized personnel will be carried out.
 
 
-![image](https://user-images.githubusercontent.com/87046340/158492642-858e1439-a4c1-457d-add2-a62db87abee9.png)
+![image](https://user-images.githubusercontent.com/87046340/158493074-077ff9c4-21f5-4f42-9261-2157f462a415.png)
 
