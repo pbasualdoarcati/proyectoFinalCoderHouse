@@ -78,18 +78,20 @@ body{
     flex-direction: row;
     width: 50%;
     .logo{
-        width: 13%;
+        width: 10%;
         position: absolute;
         left: 70%;
-        top: 18%
+        top: 24%
     }
 }
 .alumnos{
     border: 1px solid black;
 }
 .button{
-    margin-top: 12px;
-    margin-left: 125px;
+    width: 14%;
+    position: absolute;
+    left: 51%;
+    top: 28%;
 }
 .itemsTitulo{
     position: relative;
@@ -100,4 +102,10 @@ body{
     list-style: none;
     margin: 0;
     padding: 0;
+}
+input:out-of-range{
+    border: 2px solid red
+}
+input:invalid{
+    border: 2px solid red
 }
