@@ -37,16 +37,38 @@ console.log(JSON.parse(listaGuardada));
 
 if (listaGuardada) {
     listaGuardada = JSON.parse(listaGuardada)
+    
     for(let i = 0; i < listaGuardada.length; i++){
-        console.log(listaGuardada[i].nombre);
-        console.log(listaGuardada[i].apellido);
-        console.log(listaGuardada[i].materia);
-        console.log(listaGuardada[i].nota);
 
+        //Antes de continuar, creamos un salto 
 
+        let salto = document.getElementById('alumnosCargados')
+        let ul0 = document.createElement('ul')
+        salto.appendChild(ul0)
+        
         // Creamos por cada elemento un lugar para su escritura
+        //Primero creamos el ID que identificara a cada alumno 
 
-        //Primero con el nombre
+        let id = 1 ;
+        
+ 
+        let idAlumno = document.getElementById('alumnosCargados')
+        let ul = document.createElement('ul')
+        idAlumno.appendChild(ul)
+        ul.classList.add('col-sm')
+        ul.classList.add('border')
+        ul.classList.add('border-secondary')
+
+        let li = document.createElement('li')
+        let litext = document.createTextNode(id + i)
+        li.appendChild(litext)
+        ul.appendChild(li)
+        li.classList.add('col-sm')
+        li.classList.add('items')
+
+
+        
+        //Segundo con el nombre
 
 
         let nombresGuardados = document.getElementById('alumnosCargados')
@@ -63,7 +85,7 @@ if (listaGuardada) {
         li1.classList.add('col-sm')
         li1.classList.add('items')
 
-        //Segundo con el apellido
+        //Tercero con el apellido
 
 
         let apellidosGuardados = document.getElementById('alumnosCargados')
@@ -80,7 +102,7 @@ if (listaGuardada) {
         li2.classList.add('col-sm')
         li2.classList.add('items')
 
-        //Tercero con las materias
+        //Cuarto con las materias
 
         let materiaGuardados = document.getElementById('alumnosCargados')
         let ul3 = document.createElement('ul')
@@ -96,7 +118,7 @@ if (listaGuardada) {
         li3.classList.add('col-sm')
         li3.classList.add('items')
 
-        //Cuarto con la primer nota del parcial
+        //Quinto con la primer nota del parcial
 
         let primerGuardados = document.getElementById('alumnosCargados')
         let ul4 = document.createElement('ul')
@@ -113,7 +135,7 @@ if (listaGuardada) {
         li4.classList.add('items')
         
 
-        //Quinto con la segunda nota del parcial
+        //Sexto con la segunda nota del parcial
 
         let segundoGuardados = document.getElementById('alumnosCargados')
         let ul5 = document.createElement('ul')
@@ -162,7 +184,7 @@ if (listaGuardada) {
         ul7.classList.add('border-secondary')
 
         let li7 = document.createElement('li')
-        let li7text = document.createTextNode(promedio)
+        let li7text = document.createTextNode(promedio.toFixed(2))
         li7.appendChild(li7text)
         ul7.appendChild(li7)
         li7.classList.add('col-sm')
@@ -200,9 +222,9 @@ if (listaGuardada) {
         //crear un salto de linea, así cada iteración se escribe una bajo la otra
 
 
-        let salto = document.getElementById('alumnosCargados')
+        let salto2 = document.getElementById('alumnosCargados')
         let u9 = document.createElement('ul')
-        salto.appendChild(u9)
+        salto2.appendChild(u9)
 
     }
 
@@ -323,5 +345,5 @@ const guardar = () => {
         // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
 
         localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista)) 
-        location.reload();
+        window.location.reload();
 }
