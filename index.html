@@ -59,37 +59,42 @@
       <div class="container alumnos_modulo1">
 
         <label for="nombre" class="form-label col-">Nombre del Alumno</label>
-        <input type="text" class="form-control col-" id="nombre" placeholder="Ingrese el nombre" name="nombre" required>
+        <input type="text" class="form-control col-" id="nombre" placeholder="Ingrese el nombre" name="nombre" minlength="3" maxlength="25" required>
         
         <label for="apellido" class="form-label col-">Apellido del Alumno</label>
-        <input type="text" class="form-control col-" id="apellido" placeholder="Ingrese el apellido" name="apellido" required>
+        <input type="text" class="form-control col-" id="apellido" placeholder="Ingrese el apellido" name="apellido" minlength="3" maxlength="25"  required>
         
         <label for="materia" class="form-label col-">Materia</label>
-        <input type="text" class="form-control col-" id="materia" placeholder="Ingrese el materia" name="materia" required>
+        <input type="text" class="form-control col-" id="materia" placeholder="Ingrese el materia" name="materia" minlength="3" maxlength="25" required>
         
       </div>
       <div class="container alumnos_modulo2">
 
         <label for="nota1" class="form-label col-">Nota del Primer parcial</label>
-        <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10" name="nota1" required>
+        <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10" name="nota1" pattern="[0-9]" required>
         
         <label for="nota2" class="form-label col-">Nota del Segundo parcial</label>
-        <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10" name="nota2" required>
+        <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10" name="nota2" pattern="[0-9]" required>
         
         <label for="nota3" class="form-label col-">Nota del Tercer parcial</label>
-        <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10" name="nota3" required>
+        <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10" name="nota3" pattern="[0-9]" required>
       </div>
       <img src="/src/images/logo.png" alt="logo escuela" class="logo">
-      </form>
       <div class="button">
-        <button class="btn btn-secondary rounded-pill m-2" onclick="agregarAlumnos()">Agregar Alumno y aplicar resultado</button>
-        <!-- <button class="btn btn-secondary rounded-pill" onclick="resultado()">Resultado</button> -->
+        <button type="submit" class="btn btn-secondary rounded-pill m-2" onclick="agregarAlumnos()"  id="btnAlumno" >Agregar Alumno <br>Aplicar resultado</button>
+
+
       </div>
+    </form>
       
   </div>
     
 <!-- Resultado del ingreso -->
-
+<br>
+<div class="container d-flex flex-row justify-content-between p-2 bd-highlight">
+  <h4>Alumnos agregados recientemente sin guardar:</h4>
+  <button class="btn btn-secondary rounded-pill" onclick="guardar()">Guardar</button>
+</div>  
   <div class="row alumnos m-2" id="alumnos">
     <ul class="col-sm border border-secondary">
       <li class="col-sm itemsTitulo">Nombre</li>
@@ -118,8 +123,14 @@
 
   </div>
   
-</div>
+  <!-- Alumnos cargados y guardados previamente -->
 
+  <div class="container">
+    <h4>Alumnos Guardados</h4>
+  </div>
+  <div class="row alumnos m-2" id="alumnosCargados">
+  </div>
+</div>
 
 
 
