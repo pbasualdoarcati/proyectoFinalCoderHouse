@@ -368,7 +368,8 @@ buscador.addEventListener('click', (e)=>{
         if ( (alumnoBuscar.length != 0 && nombreAlumno.length != 0) ) {
             if ( ((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1) ) {
                 contador +=1
-                //Titulo del modal
+                
+                //Titulo del modal pasando por un condicional, dependiendo la cantidad de resultados que obtuvo será el mensaje, en singular o plural
 
                 if (contador < 2){
                     let text = document.getElementById('titleDefault').innerText
