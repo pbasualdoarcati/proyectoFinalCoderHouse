@@ -370,8 +370,14 @@ buscador.addEventListener('click', (e)=>{
                 contador +=1
                 //Titulo del modal
 
-                let text = document.getElementById('titleDefault').innerText
-                titleDefault.innerText = 'Alumno encontrado:'
+                if (contador < 2){
+                    let text = document.getElementById('titleDefault').innerText
+                    titleDefault.innerText = 'Alumno encontrado:'
+                }else{
+                    let text = document.getElementById('titleDefault').innerText
+                    titleDefault.innerText = 'Alumnos encontrados:'
+                }
+
 
                 //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
 
