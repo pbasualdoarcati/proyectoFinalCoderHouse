@@ -13,9 +13,11 @@ y evaluación del resultado de dicho promedio para mostrar:
 
 En el mismo simulador podemos encontrar que dos secciones, una donde el usuario actualmente está trabajando y
 cargando los datos de los alumnos y una segunda sección que mostrará los alumnos que ya cargó y guardó.
-Para lograr esta segunda sección el usuario deberá presionar el boton de "Guardar" para que el mismo sea guardado
+Para lograr esta segunda sección el usuario deberá presionar el boton de "Guardar" para que el mismo sea guardado.
 
-En proximas actualizaciones se realizara, filtración para buscar alumnos e inicio de sesión del personal autorizado.
+Se implemento un buscador de alumnos, ya sea por nombre o por apellido, totalmente funcional.
+
+En proximas actualizaciones se realizara inicio de sesión del personal autorizado.
 
 -----------------------------------------------------------------------------------------------------------------------
 # Coder House JavaScript course final project
@@ -35,8 +37,12 @@ In the same simulator we can find that two sections, one where the user is curre
 loading the student data and a second section that will show the students you have already loaded and saved.
 To achieve this second section, the user must press the "Save" button so that it is saved.
 
-In future updates, filtering to search for students and login of authorized personnel will be carried out.
+A fully functional student search engine was implemented, either by name or surname.
+
+In future updates, authorized personnel will be logged in.
 
 
 ![image](https://user-images.githubusercontent.com/87046340/158493074-077ff9c4-21f5-4f42-9261-2157f462a415.png)
+
+
 
