@@ -191,17 +191,17 @@ if (listaGuardada) {
         li7.classList.add('items')
         
 
-        //Por ultimo, creamos una variable que contendra un string con dos valores, Aprobado o Reprobado
-        //El mismo sera obtenido de una evaluación del resultado del promedio, nuevamente creamos el elemento
+        //Luego creamos una variable que contendra un string con dos valores, Aprobado o Reprobado
+        //El mismo sera obtenido de una evaluación del resultado del promedio mediante un ternario, nuevamente creamos el elemento
         // para escribirlo en el DOM
 
         let resultado
 
-        if (promedio.toFixed(2) > 6){
-            resultado = 'Aprobado'
-        }else{
-            resultado = 'Reprobado'
-        }
+        promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
+
+
+        // Por ultimo, escribimos los alumnos cargados y guardados en el localStorage
+
 
         let estadoGuardados = document.getElementById('alumnosCargados')
         let ul8 = document.createElement('ul')
@@ -262,11 +262,8 @@ const agregarAlumnos = () =>{
 
     let resultado
 
-    if (promedio.toFixed(2) > 6){
-        resultado = 'Aprobado'
-    }else{
-        resultado = 'Reprobado'
-    }
+    promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
+    
     valoresArray.push(resultado)
 
     // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
@@ -340,10 +337,160 @@ const agregarAlumnos = () =>{
 }
 
 
+//Funcionalidad de guardar todos los alumnos cargados.
 
 const guardar = () => {
         // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
-
         localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista)) 
         window.location.reload();
 }
+
+
+//Funcionalidad del buscador, el mismo será por nombre y/o apellido
+
+let buscador = document.getElementById('buscar')
+let inputSearch = document.getElementById('search')
+let modal = document.getElementById('modalResultado')
+let cerrarModal = document.getElementById('cerrarModal')
+
+buscador.addEventListener('click', (e)=>{
+    e.preventDefault()
+    modal.classList.add('modall--show')
+
+    let alumnoBuscar = inputSearch.value
+    let contador = 0
+
+    for (let i in listaGuardada) {
+        let alumno = listaGuardada[i]
+        let nombreAlumno = alumno.nombre.toLowerCase()
+        let apellidoAlumno = alumno.apellido.toLowerCase()
+
+        if ( (alumnoBuscar.length != 0 && nombreAlumno.length != 0) ) {
+            if ( ((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1) ) {
+                contador +=1
+                //Titulo del modal
+
+                let text = document.getElementById('titleDefault').innerText
+                titleDefault.innerText = 'Alumno encontrado:'
+
+                //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
+
+                let notaTotal = alumno.nota.reduce((acc, el) =>parseInt(acc) + parseInt(el))
+                let promedio = notaTotal/3
+
+                //Mostramos cada uno de los alumnos con su respectivo nombre, apellido, materia y estado
+
+                let modallContainer = document.getElementById('modallContainer')
+                let ul1 = document.createElement('ul')
+                modallContainer.appendChild(ul1)
+                ul1.classList.add('col-sm')
+                ul1.classList.add('border')
+                ul1.classList.add('border-success')
+                ul1.classList.add('modall__paragraph')
+                ul1.classList.add('p-1')
+                ul1.classList.add('m-0')
+
+                let li1 = document.createElement('li')
+                let li1text = document.createTextNode(`Nombre: ${alumno.nombre}`)
+                li1.appendChild(li1text)
+                ul1.appendChild(li1)
+                li1.classList.add('col-sm')
+                li1.classList.add('items')
+
+
+                let ul2 = document.createElement('ul')
+                modallContainer.appendChild(ul2)
+                ul2.classList.add('col-sm')
+                ul2.classList.add('border-top')
+                ul2.classList.add('border-bottom')
+                ul2.classList.add('border-success')
+                ul2.classList.add('modall__paragraph')
+                ul2.classList.add('p-1')
+                ul2.classList.add('m-0')
+
+                let li2 = document.createElement('li')
+                let li2text = document.createTextNode(`Apellido: ${alumno.apellido}`)
+                li2.appendChild(li2text)
+                ul2.appendChild(li2)
+                li2.classList.add('col-sm')
+                li2.classList.add('items')
+
+                let ul3 = document.createElement('ul')
+                modallContainer.appendChild(ul3)
+                ul3.classList.add('col-sm')
+                ul3.classList.add('border')
+                ul3.classList.add('border-success')
+                ul3.classList.add('modall__paragraph')
+                ul3.classList.add('p-1')
+                ul3.classList.add('m-0')
+
+                let li3 = document.createElement('li')
+                let li3text = document.createTextNode(`Materia: ${alumno.materia}`)
+                li3.appendChild(li3text)
+                ul3.appendChild(li3)
+                li3.classList.add('col-sm')
+                li3.classList.add('items')
+
+                let ul4 = document.createElement('ul')
+                modallContainer.appendChild(ul4)
+                ul4.classList.add('col-sm')
+                ul4.classList.add('border-top')
+                ul4.classList.add('border-bottom')
+                ul4.classList.add('border-success')
+                ul4.classList.add('modall__paragraph')
+                ul4.classList.add('p-1')
+                ul4.classList.add('m-0')
+
+                let li4 = document.createElement('li')
+                let li4text = document.createTextNode(`Promedio: ${promedio.toFixed(2)}`)
+                li4.appendChild(li4text)
+                ul4.appendChild(li4)
+                li4.classList.add('col-sm')
+                li4.classList.add('items')
+
+                //Resultado es el estado en que se encuentra la materia, se realiza mediante un ternario
+
+                let resultado
+
+                promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
+
+                let ul5 = document.createElement('ul')
+                modallContainer.appendChild(ul5)
+                ul5.classList.add('col-sm')
+                ul5.classList.add('border')
+                ul5.classList.add('border-success')
+                ul5.classList.add('modall__paragraph')
+                ul5.classList.add('p-1')
+                ul5.classList.add('m-0')
+
+                let li5 = document.createElement('li')
+                let li5text = document.createTextNode(`Estado: ${resultado}`)
+                li5.appendChild(li5text)
+                ul5.appendChild(li5)
+                li5.classList.add('col-sm')
+                li5.classList.add('items')
+
+                //Agregamos un elemento más para realizar un salto
+
+                let salto = document.getElementById('modallContainer')
+                let u6 = document.createElement('ul')
+                salto.appendChild(u6)
+            }
+        }
+    }
+    if (contador === 0){
+        let text = document.getElementById('titleDefault').innerText
+        titleDefault.innerText = 'Alumno no encontrado...'
+    }
+            
+
+    
+
+})
+
+cerrarModal.addEventListener('click', (e)=>{
+    e.preventDefault()
+    modal.classList.remove('modall--show')
+    inputSearch.value = ''
+    window.location.reload();
+})
