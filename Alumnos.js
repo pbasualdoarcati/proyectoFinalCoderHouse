@@ -234,6 +234,9 @@ if (listaGuardada) {
    
 
 //Esta es nuestra función de agregar alumnos, en la cual va a lanzar la creación del / de los objetos alumnos.
+
+let idAlumno = 0
+
 const agregarAlumnos = () =>{
 
     const alumno1 = new Alumnos()
@@ -266,15 +269,52 @@ const agregarAlumnos = () =>{
     
     valoresArray.push(resultado)
 
+//Guardamos en un contenedor con ID dinamico toda la lista, con el fin de poder elimnar dependiendo el ID
+    
+    let alumnoContainer = document.getElementById('alumnos')
+    let divAlumnoContainer = document.createElement('div')
+    divAlumnoContainer.classList.add('row')
+    divAlumnoContainer.classList.add('m-0')
+    divAlumnoContainer.classList.add('p-0')
+    divAlumnoContainer.setAttribute('id', `${idAlumno+1}`)
+    alumnoContainer.appendChild(divAlumnoContainer)
+    
+    console.log(divAlumnoContainer);
+    console.log(alumnoContainer);
+    
+    idAlumno++
+
+    
+
+    console.log(idAlumno);
+
     // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
 
     const nuevoAlumno = ()=> {
 
-        //Primer For con la intención de escribir los datos obtenidos en los primeros 3 input
-        //cuyos valores son el nombre, apellido y materia del alumno
+        // Cada vez que lanzamos la función, le designamos un ID basandonos en el contenido de idAlumno, de manera que para eliminar el elemento podemos identificar este numero
+
+        let nuevaLista = document.getElementById(`${idAlumno}`)
+            
+        let ul1 = document.createElement('ul')
+        nuevaLista.appendChild(ul1)
+        ul1.classList.add('col-sm')
+        ul1.classList.add('border')
+        ul1.classList.add('border-secondary')
+        let li1 = document.createElement('li')
+        let li1Text = document.createTextNode(`${idAlumno}`)
+        li1.appendChild(li1Text)
+        ul1.appendChild(li1)
+        li1.classList.add('col-sm')
+        li1.classList.add('items')
+
+        // Primer For con la intención de escribir los datos obtenidos en los primeros 3 input
+        // cuyos valores son el nombre, apellido y materia del alumno
+
         for (let i = 0; i < 3; i++) {
-            console.log('for de nuevoAlumno() : ',valores[i]); //Realizamos un console.log para saber que es lo que estamos obteniendo
-            let nuevaLista = document.getElementById('alumnos')
+            // console.log('for de nuevoAlumno() : ',valores[i]); //Realizamos un console.log para saber que es lo que estamos obteniendo
+            
+            let nuevaLista = document.getElementById(`${idAlumno}`)
             let ul = document.createElement('ul')
             nuevaLista.appendChild(ul)
             ul.classList.add('col-sm')
@@ -290,10 +330,12 @@ const agregarAlumnos = () =>{
         
         }
         
-        //En nuestro segundo For, tomamos lo contenido en la variable anterior, cuyo contenido es una
-        //matriz, la dividimos en un array plano y con eso lo impimimos en el DOM.
+        // En nuestro segundo For, tomamos lo contenido en la variable anterior, cuyo contenido es una
+        // matriz, la dividimos en un array plano y con eso lo impimimos en el DOM.
+       
+       
         for (const elemento of valoresArray.flat()) {
-            let nuevaLista = document.getElementById('alumnos')
+            let nuevaLista = document.getElementById(`${idAlumno}`)
             let ul = document.createElement('ul')
             nuevaLista.appendChild(ul)
             ul.classList.add('col-sm')
@@ -313,36 +355,19 @@ const agregarAlumnos = () =>{
         
     }
     
-    
-
-
-    //Con estas lineas lo que voy a crear es un salto de linea cuando imprima los nuevos alumnos
-    // luego llamo a la función para cargar e imprimir los nuevos alumnos
-
-    let nuevaLista = document.getElementById('alumnos')
-    let ul2 = document.createElement('ul')
-    nuevaLista.appendChild(ul2)
     nuevoAlumno()
-    
-    
-    // CON ESTA LINEA RECUEPRO EL OJBETO CON LOS ALUMOS GUARDADOS EN EL LOCAL STORAG 
-    // let alumnosLocalStorage = JSON.parse(localStorage.getItem('alumnosLista'))
-    // console.log('alumnosLocalStorage : ', alumnosLocalStorage[0].nombre)
 
     //Limpiamos el formulario
     document.getElementById('formularioAlumno').reset()
-
-
-
 }
 
 
 //Funcionalidad de guardar todos los alumnos cargados.
 
 const guardar = () => {
-        // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
-        localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista)) 
-        window.location.reload();
+    // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
+    localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista)) 
+    window.location.reload();
 }
 
 
@@ -350,40 +375,48 @@ const guardar = () => {
 
 let buscador = document.getElementById('buscar')
 let inputSearch = document.getElementById('search')
-let modal = document.getElementById('modalResultado')
+let modalResultado = document.getElementById('modalResultado')
+let modall = document.getElementById('modall')
 let cerrarModal = document.getElementById('cerrarModal')
+let containerResultado = document.getElementById('containerResultado')
 
 buscador.addEventListener('click', (e)=>{
     e.preventDefault()
-    modal.classList.add('modall--show')
+    modalResultado.classList.add('modall--show')
 
     let alumnoBuscar = inputSearch.value
     let contador = 0
+
+    
 
     for (let i in listaGuardada) {
         let alumno = listaGuardada[i]
         let nombreAlumno = alumno.nombre.toLowerCase()
         let apellidoAlumno = alumno.apellido.toLowerCase()
 
+
         if ( (alumnoBuscar.length != 0 && nombreAlumno.length != 0) ) {
             if ( ((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1) ) {
                 contador +=1
+
+                //Creamos un contenedor que luego usaremos para eliminar y limpiar los resultados sin tener que refrescar la pantalla
                 
-                //Titulo del modal pasando por un condicional, dependiendo la cantidad de resultados que obtuvo será el mensaje, en singular o plural
-
-                if (contador < 2){
-                    let text = document.getElementById('titleDefault').innerText
-                    titleDefault.innerText = 'Alumno encontrado:'
-                }else{
-                    let text = document.getElementById('titleDefault').innerText
-                    titleDefault.innerText = 'Alumnos encontrados:'
-                }
-
+                let divModalContainer = document.createElement('div')
+                divModalContainer.classList.add('row')
+                divModalContainer.setAttribute('id', 'modallContainer')
+                modall.appendChild(divModalContainer)
+                
+                
+                
+                //Titulo del modal
+                let text = document.getElementById('titleDefault').innerText
+                titleDefault.innerText = 'Alumno encontrado:'
 
                 //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
 
                 let notaTotal = alumno.nota.reduce((acc, el) =>parseInt(acc) + parseInt(el))
                 let promedio = notaTotal/3
+
 
                 //Mostramos cada uno de los alumnos con su respectivo nombre, apellido, materia y estado
 
@@ -495,9 +528,24 @@ buscador.addEventListener('click', (e)=>{
 
 })
 
+
+
 cerrarModal.addEventListener('click', (e)=>{
     e.preventDefault()
-    modal.classList.remove('modall--show')
+    modalResultado.classList.remove('modall--show')
+    let divContenedor = document.getElementById('modallContainer')
     inputSearch.value = ''
-    window.location.reload();
+    divContenedor.outerHTML = ''
+
+})
+
+// Eliminar elemento
+
+let eliminarUltimo = document.getElementById('eliminar')
+
+
+eliminarUltimo.addEventListener('click', ()=> {
+    document.getElementById(`${idAlumno}`).outerHTML = ''
+    idAlumno-=1
+    alumnosLista.pop()
 })

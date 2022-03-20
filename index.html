@@ -89,8 +89,12 @@
   <div class="container d-flex flex-row justify-content-between p-2 bd-highlight">
     <h4>Alumnos agregados recientemente sin guardar:</h4>
     <button class="btn btn-secondary rounded-pill" onclick="guardar()">Guardar</button>
+    <button class="btn btn-secondary rounded-pill" id="eliminar">Eliminar ultimo ingresado</button>
   </div>  
-    <div class="row alumnos m-2" id="alumnos">
+    <div class="row m-2">
+      <ul class="col-sm border border-secondary">
+        <li class="col-sm itemsTitulo">ID</li>
+      </ul>
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">Nombre</li>
       </ul>
@@ -116,6 +120,7 @@
         <li class="col-sm itemsTitulo">Estado</li>
       </ul>
     </div>
+    <div class="row m-2"  id="alumnos"></div>
 
     <!-- Alumnos cargados y guardados previamente -->
 
@@ -155,7 +160,7 @@
   <section class="modall " id="modalResultado">
     <div class="modall__container" id="containerResultado">
       <h5 class="modall__title" id="titleDefault" ></h5>
-      <div class="row" id="modallContainer">
+      <div class="row" id="modall">
       </div>
       <a href="" class="modall__close" id="cerrarModal">Cerrar</a>
     </div>
