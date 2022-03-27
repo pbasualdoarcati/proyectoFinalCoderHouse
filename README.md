@@ -49,5 +49,6 @@ In future updates, authorized personnel will be logged in.
 ![alumnos encontrados](https://user-images.githubusercontent.com/87046340/158905313-158e4cd5-343d-4f99-b5dd-21db6b1f74c9.png)
 ![alumno encontrado](https://user-images.githubusercontent.com/87046340/158905351-d98b2a38-db40-4556-be1e-171d2b486784.png)
 ![eliminar 1](https://user-images.githubusercontent.com/87046340/160305110-30a50e65-7a4b-4619-8518-5fb2b4ea4e05.png)
-![eliminar 2](https://user-images.githubusercontent.com/87046340/160305122-ee2d60e0-342f-43fd-9d0f-15597b4e46d9.png)
+![eliminar 2](https://user-images.githubusercontent.com/87046340/160305164-c33a7fed-7dbc-480e-9360-4fc583b476d6.png)
+
 
