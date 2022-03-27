@@ -1,13 +1,16 @@
+// const fs = require('fs')
+
+
 class Alumnos {
-    constructor(){
+    constructor() {
         this.nombre = '';
-        this.apellido= '';
+        this.apellido = '';
         this.materia = '';
-        this.nota= [];
+        this.nota = [];
     }
-    agregarAlumnos(){
+    agregarAlumnos() {
         const nombre = document.getElementById('nombre')
-        this.nombre = nombre.value 
+        this.nombre = nombre.value
         const apellido = document.getElementById('apellido')
         this.apellido = apellido.value
         const materia = document.getElementById('materia')
@@ -24,34 +27,49 @@ class Alumnos {
 
 // CREO UN ARRAY VACIO PARA IR CARGANDO LOS ALUMNOS AL LISTADO
 
-const alumnosLista = []; 
-    
+const alumnosLista = [];
+
 
 
 // Creo una variable para guardar todo lo contenido en el localStorage
-let listaGuardada = localStorage.getItem('alumnosLista')
-console.log(JSON.parse(listaGuardada));
+let listaProvisoria = localStorage.getItem('alumnosLista')
+
+
+//Variable para escribir en el DOM
+let listaGuardada = []
+
+//Pusheo en la variable con spread para poder usar varios push y que se vayan sumando los objetos y no borrando lo que ya tengo cargado, pero ahora esto hay que llevarlo al boton de guardar
+listaGuardada.push(...JSON.parse(listaProvisoria))
+
+
+
+
+// let probamos = listaGuardada.split(coma)
+// console.log(probamos);
+
+console.log(listaGuardada);
+
 
 //Ahora compruebo que listaGuardada contenga información de cargas anteriores, en caso positivo, debo
 //separar el array en cada objeto y esos objetos a su vez iterarlos para poder escribirlos en el DOM
 
 if (listaGuardada) {
-    listaGuardada = JSON.parse(listaGuardada)
-    
-    for(let i = 0; i < listaGuardada.length; i++){
+    // listaGuardada = JSON.parse(listaGuardada)
+
+    for (let i = 0; i < listaGuardada.length; i++) {
 
         //Antes de continuar, creamos un salto 
 
         let salto = document.getElementById('alumnosCargados')
         let ul0 = document.createElement('ul')
         salto.appendChild(ul0)
-        
+
         // Creamos por cada elemento un lugar para su escritura
         //Primero creamos el ID que identificara a cada alumno 
 
-        let id = 1 ;
-        
- 
+        let id = 1;
+
+
         let idAlumno = document.getElementById('alumnosCargados')
         let ul = document.createElement('ul')
         idAlumno.appendChild(ul)
@@ -67,7 +85,7 @@ if (listaGuardada) {
         li.classList.add('items')
 
 
-        
+
         //Segundo con el nombre
 
 
@@ -126,14 +144,14 @@ if (listaGuardada) {
         ul4.classList.add('col-sm')
         ul4.classList.add('border')
         ul4.classList.add('border-secondary')
-        
+
         let li4 = document.createElement('li')
         let li4text = document.createTextNode(listaGuardada[i].nota[0])
         li4.appendChild(li4text)
         ul4.appendChild(li4)
         li4.classList.add('col-sm')
         li4.classList.add('items')
-        
+
 
         //Sexto con la segunda nota del parcial
 
@@ -172,10 +190,10 @@ if (listaGuardada) {
         //y la segunda va a guardar el promedio obtenido con el resultado de la sumatoria
         //divido 3 que son las cantidades de notas ingresadas y creamos los elementos
         //para escribirlo en el DOM
-        
+
         let notaTotal = listaGuardada[i].nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
         let promedio = notaTotal / 3
-        
+
         let promedioGuardados = document.getElementById('alumnosCargados')
         let ul7 = document.createElement('ul')
         promedioGuardados.appendChild(ul7)
@@ -189,7 +207,7 @@ if (listaGuardada) {
         ul7.appendChild(li7)
         li7.classList.add('col-sm')
         li7.classList.add('items')
-        
+
 
         //Luego creamos una variable que contendra un string con dos valores, Aprobado o Reprobado
         //El mismo sera obtenido de una evaluación del resultado del promedio mediante un ternario, nuevamente creamos el elemento
@@ -230,145 +248,186 @@ if (listaGuardada) {
 
 }
 
- 
-   
+
+
 
 //Esta es nuestra función de agregar alumnos, en la cual va a lanzar la creación del / de los objetos alumnos.
 
 let idAlumno = 0
+let btnAlumno = document.getElementById('btnAlumno')
 
-const agregarAlumnos = () =>{
+btnAlumno.addEventListener('click', (e) => {
 
-    const alumno1 = new Alumnos()
-    alumno1.agregarAlumnos()
-    alumnosLista.push(alumno1)
-    console.log('agregarAlumnos() : ', alumno1); //Realizamos un console.log para saber que es lo que estamos obteniendo
-    console.log('alumnosLista[] : ', alumnosLista); //Realizamos un console.log para saber que es lo que estamos obteniendo
+    if ((nombre.value !== '') && (apellido.value !== '') && (materia.value !== '') && (nota1.value !== '') && (nota2.value !== '') && (nota3.value !== '')) {
 
-    //Aqui vamos a capturar los valores de manera separada para tratarlos en los for de manera 
-    //independiente ya que el segundo valor nos devuelve una matriz que luego debemos separarla
-    //Para poder escribirlo en el DOM
+        e.preventDefault()
 
-    let valores = Object.values(alumno1)
-    let valoresArray = [Object.values(alumno1.nota)]
-    console.log('valoresArray: ', valoresArray);//Realizamos un console.log para saber que es lo que estamos obteniendo
+        nombre.classList.remove('invalid')
+        apellido.classList.remove('invalid')
+        materia.classList.remove('invalid')
+        nota1.classList.remove('invalid')
+        nota2.classList.remove('invalid')
+        nota3.classList.remove('invalid')
 
-    //Aqui vamos a aplicar el promedio en base a los valores ingresados por el usuario en los input 
-    //de Notas y lo pusheamos al array
 
-    let notaTotal = alumno1.nota.reduce((acc, el) =>parseInt(acc) + parseInt(el))
-    let promedio = notaTotal / alumno1.nota.length
-    valoresArray.push(promedio.toFixed(2))
+        const alumno1 = new Alumnos()
+        alumno1.agregarAlumnos()
+        alumnosLista.push(alumno1)
+        console.log('agregarAlumnos() : ', alumno1); //Realizamos un console.log para saber que es lo que estamos obteniendo
+        console.log('alumnosLista[] : ', alumnosLista); //Realizamos un console.log para saber que es lo que estamos obteniendo
 
-    // Con estas lineas nos aseguramos que guardamos si el alumno aprobo o no dependiendo el 
-    //resultado del promedio y lo pusheamos al array
+        //Aqui vamos a capturar los valores de manera separada para tratarlos en los for de manera 
+        //independiente ya que el segundo valor nos devuelve una matriz que luego debemos separarla
+        //Para poder escribirlo en el DOM
 
-    let resultado
+        let valores = Object.values(alumno1)
+        let valoresArray = [Object.values(alumno1.nota)]
+        console.log('valoresArray: ', valoresArray);//Realizamos un console.log para saber que es lo que estamos obteniendo
 
-    promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
-    
-    valoresArray.push(resultado)
+        //Aqui vamos a aplicar el promedio en base a los valores ingresados por el usuario en los input 
+        //de Notas y lo pusheamos al array
 
-//Guardamos en un contenedor con ID dinamico toda la lista, con el fin de poder elimnar dependiendo el ID
-    
-    let alumnoContainer = document.getElementById('alumnos')
-    let divAlumnoContainer = document.createElement('div')
-    divAlumnoContainer.classList.add('row')
-    divAlumnoContainer.classList.add('m-0')
-    divAlumnoContainer.classList.add('p-0')
-    divAlumnoContainer.setAttribute('id', `${idAlumno+1}`)
-    alumnoContainer.appendChild(divAlumnoContainer)
-    
-    console.log(divAlumnoContainer);
-    console.log(alumnoContainer);
-    
-    idAlumno++
+        let notaTotal = alumno1.nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
+        let promedio = notaTotal / alumno1.nota.length
+        valoresArray.push(promedio.toFixed(2))
 
-    
+        // Con estas lineas nos aseguramos que guardamos si el alumno aprobo o no dependiendo el 
+        //resultado del promedio y lo pusheamos al array
 
-    console.log(idAlumno);
+        let resultado
 
-    // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
+        promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
 
-    const nuevoAlumno = ()=> {
+        valoresArray.push(resultado)
 
-        // Cada vez que lanzamos la función, le designamos un ID basandonos en el contenido de idAlumno, de manera que para eliminar el elemento podemos identificar este numero
+        //Guardamos en un contenedor con ID dinamico toda la lista, con el fin de poder elimnar dependiendo el ID
 
-        let nuevaLista = document.getElementById(`${idAlumno}`)
-            
-        let ul1 = document.createElement('ul')
-        nuevaLista.appendChild(ul1)
-        ul1.classList.add('col-sm')
-        ul1.classList.add('border')
-        ul1.classList.add('border-secondary')
-        let li1 = document.createElement('li')
-        let li1Text = document.createTextNode(`${idAlumno}`)
-        li1.appendChild(li1Text)
-        ul1.appendChild(li1)
-        li1.classList.add('col-sm')
-        li1.classList.add('items')
+        let alumnoContainer = document.getElementById('alumnos')
+        let divAlumnoContainer = document.createElement('div')
+        divAlumnoContainer.classList.add('row')
+        divAlumnoContainer.classList.add('m-0')
+        divAlumnoContainer.classList.add('p-0')
+        divAlumnoContainer.setAttribute('id', `${idAlumno + 1}`)
+        alumnoContainer.appendChild(divAlumnoContainer)
 
-        // Primer For con la intención de escribir los datos obtenidos en los primeros 3 input
-        // cuyos valores son el nombre, apellido y materia del alumno
+        console.log(divAlumnoContainer);
+        console.log(alumnoContainer);
 
-        for (let i = 0; i < 3; i++) {
-            // console.log('for de nuevoAlumno() : ',valores[i]); //Realizamos un console.log para saber que es lo que estamos obteniendo
-            
+        idAlumno++
+
+
+
+        console.log(idAlumno);
+
+        // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
+
+        const nuevoAlumno = () => {
+
+            // Cada vez que lanzamos la función, le designamos un ID basandonos en el contenido de idAlumno, de manera que para eliminar el elemento podemos identificar este numero
+
             let nuevaLista = document.getElementById(`${idAlumno}`)
-            let ul = document.createElement('ul')
-            nuevaLista.appendChild(ul)
-            ul.classList.add('col-sm')
-            ul.classList.add('border')
-            ul.classList.add('border-secondary')
-            
-            let li = document.createElement('li')
-            let liText = document.createTextNode(valores[i])
-            li.appendChild(liText)
-            ul.appendChild(li)
-            li.classList.add('col-sm')
-            li.classList.add('items')
-        
-        }
-        
-        // En nuestro segundo For, tomamos lo contenido en la variable anterior, cuyo contenido es una
-        // matriz, la dividimos en un array plano y con eso lo impimimos en el DOM.
-       
-       
-        for (const elemento of valoresArray.flat()) {
-            let nuevaLista = document.getElementById(`${idAlumno}`)
-            let ul = document.createElement('ul')
-            nuevaLista.appendChild(ul)
-            ul.classList.add('col-sm')
-            ul.classList.add('border')
-            ul.classList.add('border-secondary')
 
-            
-            let li = document.createElement('li')
-            let liText = document.createTextNode(elemento)
-            li.appendChild(liText)
-            ul.appendChild(li)
-            li.classList.add('col-sm')
-            li.classList.add('items')
+            let ul1 = document.createElement('ul')
+            nuevaLista.appendChild(ul1)
+            ul1.classList.add('col-sm')
+            ul1.classList.add('border')
+            ul1.classList.add('border-secondary')
+            let li1 = document.createElement('li')
+            let li1Text = document.createTextNode(alumnosLista.length)
+            li1.appendChild(li1Text)
+            ul1.appendChild(li1)
+            li1.classList.add('col-sm')
+            li1.classList.add('items')
+            li1.setAttribute('id', `idTemporal${idAlumno}`)
+
+            // Primer For con la intención de escribir los datos obtenidos en los primeros 3 input
+            // cuyos valores son el nombre, apellido y materia del alumno
+
+            for (let i = 0; i < 3; i++) {
+                // console.log('for de nuevoAlumno() : ',valores[i]); //Realizamos un console.log para saber que es lo que estamos obteniendo
+
+                let nuevaLista = document.getElementById(`${idAlumno}`)
+                let ul = document.createElement('ul')
+                nuevaLista.appendChild(ul)
+                ul.classList.add('col-sm')
+                ul.classList.add('border')
+                ul.classList.add('border-secondary')
+
+                let li = document.createElement('li')
+                let liText = document.createTextNode(valores[i])
+                li.appendChild(liText)
+                ul.appendChild(li)
+                li.classList.add('col-sm')
+                li.classList.add('items')
+
+            }
+
+            // En nuestro segundo For, tomamos lo contenido en la variable anterior, cuyo contenido es una
+            // matriz, la dividimos en un array plano y con eso lo impimimos en el DOM.
+
+
+            for (const elemento of valoresArray.flat()) {
+                let nuevaLista = document.getElementById(`${idAlumno}`)
+                let ul = document.createElement('ul')
+                nuevaLista.appendChild(ul)
+                ul.classList.add('col-sm')
+                ul.classList.add('border')
+                ul.classList.add('border-secondary')
+
+
+                let li = document.createElement('li')
+                let liText = document.createTextNode(elemento)
+                li.appendChild(liText)
+                ul.appendChild(li)
+                li.classList.add('col-sm')
+                li.classList.add('items')
+            }
+
+
+
         }
 
-        
-        
+        nuevoAlumno()
+
+        //Limpiamos el formulario
+        document.getElementById('formularioAlumno').reset()
+    } else {
+        nombre.classList.add('invalid')
+        apellido.classList.add('invalid')
+        materia.classList.add('invalid')
+        nota1.classList.add('invalid')
+        nota2.classList.add('invalid')
+        nota3.classList.add('invalid')
     }
-    
-    nuevoAlumno()
-
-    //Limpiamos el formulario
-    document.getElementById('formularioAlumno').reset()
-}
+})
 
 
 //Funcionalidad de guardar todos los alumnos cargados.
+let btnGuardar = document.getElementById('btnGuardar')
 
-const guardar = () => {
+btnGuardar.addEventListener('click', () => {
     // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
-    localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista)) 
+
+    localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista))
+    // guardarElementos()
     window.location.reload();
+
+})
+
+/*
+function guardarElementos() {
+    let guardarLista = JSON.parse(localStorage.getItem('alumnosLista'))
+    console.log('lo guardado en guardarLista es: ' + guardarLista);
+
+    listaGuardada.push(...guardarLista)
+
+    console.log('lo guardado en listaGuardada es: ' + listaGuardada);
+
+    // const listaGuardadaStringify = JSON.stringify(listaGuardada)
+    
+    fs.writeFileSync('/src/carga.json', listaGuardada, 'utf-8')
 }
+*/
 
 
 //Funcionalidad del buscador, el mismo será por nombre y/o apellido
@@ -380,14 +439,14 @@ let modall = document.getElementById('modall')
 let cerrarModal = document.getElementById('cerrarModal')
 let containerResultado = document.getElementById('containerResultado')
 
-buscador.addEventListener('click', (e)=>{
+buscador.addEventListener('click', (e) => {
     e.preventDefault()
     modalResultado.classList.add('modall--show')
 
     let alumnoBuscar = inputSearch.value
     let contador = 0
 
-    
+
 
     for (let i in listaGuardada) {
         let alumno = listaGuardada[i]
@@ -395,27 +454,27 @@ buscador.addEventListener('click', (e)=>{
         let apellidoAlumno = alumno.apellido.toLowerCase()
 
 
-        if ( (alumnoBuscar.length != 0 && nombreAlumno.length != 0) ) {
-            if ( ((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1) ) {
-                contador +=1
+        if ((alumnoBuscar.length != 0 && nombreAlumno.length != 0)) {
+            if (((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1)) {
+                contador += 1
 
                 //Creamos un contenedor que luego usaremos para eliminar y limpiar los resultados sin tener que refrescar la pantalla
-                
+
                 let divModalContainer = document.createElement('div')
                 divModalContainer.classList.add('row')
                 divModalContainer.setAttribute('id', 'modallContainer')
                 modall.appendChild(divModalContainer)
-                
-                
-                
+
+
+
                 //Titulo del modal
                 let text = document.getElementById('titleDefault').innerText
                 titleDefault.innerText = 'Alumno encontrado:'
 
                 //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
 
-                let notaTotal = alumno.nota.reduce((acc, el) =>parseInt(acc) + parseInt(el))
-                let promedio = notaTotal/3
+                let notaTotal = alumno.nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
+                let promedio = notaTotal / 3
 
 
                 //Mostramos cada uno de los alumnos con su respectivo nombre, apellido, materia y estado
@@ -518,19 +577,19 @@ buscador.addEventListener('click', (e)=>{
             }
         }
     }
-    if (contador === 0){
+    if (contador === 0) {
         let text = document.getElementById('titleDefault').innerText
         titleDefault.innerText = 'Alumno no encontrado...'
     }
-            
 
-    
+
+
 
 })
 
 
 
-cerrarModal.addEventListener('click', (e)=>{
+cerrarModal.addEventListener('click', (e) => {
     e.preventDefault()
     modalResultado.classList.remove('modall--show')
     let divContenedor = document.getElementById('modallContainer')
@@ -541,11 +600,29 @@ cerrarModal.addEventListener('click', (e)=>{
 
 // Eliminar elemento
 
-let eliminarUltimo = document.getElementById('eliminar')
+let btnEliminarUltimo = document.getElementById('btnEliminarUltimo')
 
 
-eliminarUltimo.addEventListener('click', ()=> {
-    document.getElementById(`${idAlumno}`).outerHTML = ''
-    idAlumno-=1
-    alumnosLista.pop()
+btnEliminarUltimo.addEventListener('click', () => {
+
+    Swal.fire({
+        title: '¿Está seguro que desea elimiar el último alumno cargado?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById(`${idAlumno}`).outerHTML = ''
+            idAlumno -= 1
+            alumnosLista.pop()
+            Swal.fire({
+                title: '¡Alumno borrado!',
+                icon: 'success',
+            })
+        }
+    })
+
+
+
 })
