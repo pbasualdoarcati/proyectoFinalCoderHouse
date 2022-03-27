@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/css/index.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <title>Sistema de Gestión de Alumnos</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/css/index.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <title>Sistema de Gestión de Alumnos</title>
 </head>
+
 <body>
-    <!-- Barra de navegación -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
-              <img src="https://www.greatplacetowork.com.ar/images/coderhouse-logo.png" alt="" width="30" height="24">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
-                </li>
-              </ul>
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0 login">
-                <li class="nav-item">
-                  <a class="nav-link active text-light" aria-current="page" href="#">Iniciar sesión</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-      </nav>
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
+        <img src="https://www.greatplacetowork.com.ar/images/coderhouse-logo.png" alt="" width="30" height="24">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 login">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="#">Iniciar sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <!-- Ingreso de alumnos -->
   <div class="title container">
-    <h1>Sistema de gestión de alumnos</h1> 
+    <h1>Sistema de gestión de alumnos</h1>
   </div>
   <div class="subtitulo">
     <h2>División por materias</h2>
@@ -57,40 +61,47 @@
         <div class="container alumnos_modulo1">
 
           <label for="nombre" class="form-label col-">Nombre del Alumno</label>
-          <input type="text" class="form-control col-" id="nombre" placeholder="Ingrese el nombre" name="nombre" minlength="3" maxlength="25" required>
+          <input type="text" class="form-control col-" id="nombre" placeholder="Ingrese el nombre" name="nombre"
+            minlength="3" maxlength="25" required>
 
           <label for="apellido" class="form-label col-">Apellido del Alumno</label>
-          <input type="text" class="form-control col-" id="apellido" placeholder="Ingrese el apellido" name="apellido" minlength="3" maxlength="25"  required>
+          <input type="text" class="form-control col-" id="apellido" placeholder="Ingrese el apellido" name="apellido"
+            minlength="3" maxlength="25" required>
 
           <label for="materia" class="form-label col-">Materia</label>
-          <input type="text" class="form-control col-" id="materia" placeholder="Ingrese el materia" name="materia" minlength="3" maxlength="25" required>
+          <input type="text" class="form-control col-" id="materia" placeholder="Ingrese el materia" name="materia"
+            minlength="3" maxlength="25" required>
 
         </div>
         <div class="container alumnos_modulo2">
 
           <label for="nota1" class="form-label col-">Nota del Primer parcial</label>
-          <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10" name="nota1" pattern="[0-9]" required>
+          <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10"
+            name="nota1" pattern="[0-9]" required>
 
           <label for="nota2" class="form-label col-">Nota del Segundo parcial</label>
-          <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10" name="nota2" pattern="[0-9]" required>
+          <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10"
+            name="nota2" pattern="[0-9]" required>
 
           <label for="nota3" class="form-label col-">Nota del Tercer parcial</label>
-          <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10" name="nota3" pattern="[0-9]" required>
+          <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10"
+            name="nota3" pattern="[0-9]" required>
         </div>
         <img src="/src/images/logo.png" alt="logo escuela" class="logo">
         <div class="button">
-          <button type="submit" class="btn btn-secondary rounded-pill m-2" onclick="agregarAlumnos()"  id="btnAlumno" >Agregar Alumno <br>Aplicar resultado</button>
+          <button type="submit" class="btn btn-secondary rounded-pill m-2" id="btnAlumno">Agregar Alumno <br>Aplicar
+            resultado</button>
         </div>
       </form>
     </div>
 
-  <!-- Resultado del ingreso -->
-  <br>
-  <div class="container d-flex flex-row justify-content-between p-2 bd-highlight">
-    <h4>Alumnos agregados recientemente sin guardar:</h4>
-    <button class="btn btn-secondary rounded-pill" onclick="guardar()">Guardar</button>
-    <button class="btn btn-secondary rounded-pill" id="eliminar">Eliminar ultimo ingresado</button>
-  </div>  
+    <!-- Resultado del ingreso -->
+    <br>
+    <div class="container d-flex flex-row justify-content-between p-2 bd-highlight">
+      <h4>Alumnos agregados recientemente sin guardar:</h4>
+      <button class="btn btn-secondary rounded-pill" id="btnGuardar">Guardar</button>
+      <button class="btn btn-secondary rounded-pill" id="btnEliminarUltimo">Eliminar ultimo ingresado</button>
+    </div>
     <div class="row m-2">
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">ID</li>
@@ -99,7 +110,7 @@
         <li class="col-sm itemsTitulo">Nombre</li>
       </ul>
       <ul class="col-sm border border-secondary">
-       <li class="col-sm itemsTitulo">Apellido</li>
+        <li class="col-sm itemsTitulo">Apellido</li>
       </ul>
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">Materia</li>
@@ -120,7 +131,7 @@
         <li class="col-sm itemsTitulo">Estado</li>
       </ul>
     </div>
-    <div class="row m-2"  id="alumnos"></div>
+    <div class="row m-2" id="alumnos"></div>
 
     <!-- Alumnos cargados y guardados previamente -->
 
@@ -135,7 +146,7 @@
         <li class="col-sm itemsTitulo">Nombre</li>
       </ul>
       <ul class="col-sm border border-secondary">
-       <li class="col-sm itemsTitulo">Apellido</li>
+        <li class="col-sm itemsTitulo">Apellido</li>
       </ul>
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">Materia</li>
@@ -159,12 +170,13 @@
   </div>
   <section class="modall " id="modalResultado">
     <div class="modall__container" id="containerResultado">
-      <h5 class="modall__title" id="titleDefault" ></h5>
+      <h5 class="modall__title" id="titleDefault"></h5>
       <div class="row" id="modall">
       </div>
       <a href="" class="modall__close" id="cerrarModal">Cerrar</a>
     </div>
   </section>
-  <script src="/Alumnos.js"></script>
+  <script type="module" src="/Alumnos.js"></script>
 </body>
+
 </html>
