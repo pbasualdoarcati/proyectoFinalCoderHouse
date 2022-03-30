@@ -14,6 +14,7 @@
 
 <body>
   <!-- Barra de navegación -->
+  <div class="init" id="init"></div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
@@ -30,8 +31,28 @@
           </li>
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 login">
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#">Iniciar sesión</a>
+          <li class="nav-item ">
+            <div class="mb-1" id="containerLogin">
+              <dialog class="">
+
+                <form action="" class="form-label d-block mt-2" id="formularioLogin">
+                  <label for="user">Usuario
+                    <input type="text" class="form-control" id="user" title="Usuario admin">
+                  </label>
+
+
+                  <label for="password">Contraseña
+                    <input type="password" class="form-control" id="password" title="Contraseña admin">
+                  </label>
+                </form>
+                <div class="container d-flex flex-row justify-content-center p-2 bd-highlight">
+                  <button class="btn btn-primary me-1" id="inicioSesion">Iniciar sesión</button>
+                  <button id="cancel" class="btn btn-primary">salir</button>
+                </div>
+              </dialog>
+            </div>
+            <a class="nav-link active text-light" aria-current="page" href="#" id="loginUser">Iniciar sesión</a>
+            <a class="nav-link active text-light" aria-current="page" href="#" id="logout" hidden>Log Out</a>
           </li>
         </ul>
       </div>
@@ -104,7 +125,7 @@
     </div>
     <div class="row m-2">
       <ul class="col-sm border border-secondary">
-        <li class="col-sm itemsTitulo">ID</li>
+        <li class="col-sm itemsTitulo">Acción</li>
       </ul>
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">Nombre</li>
@@ -131,14 +152,14 @@
         <li class="col-sm itemsTitulo">Estado</li>
       </ul>
     </div>
-    <div class="row m-2" id="alumnos"></div>
+    <div class="row m-2 alumnosCargados" id="alumnos"></div>
 
     <!-- Alumnos cargados y guardados previamente -->
 
     <div class="container">
       <h4>Alumnos Guardados</h4>
     </div>
-    <div class="row alumnos m-2" id="alumnosCargados">
+    <div class="row m-2" >
       <ul class="col-sm border border-secondary">
         <li class="col-sm itemsTitulo">ID</li>
       </ul>
@@ -167,6 +188,7 @@
         <li class="col-sm itemsTitulo">Estado</li>
       </ul>
     </div>
+    <div class="row m-2 alumnosGuardados" id="alumnosGuardados"></div>
   </div>
   <section class="modall " id="modalResultado">
     <div class="modall__container" id="containerResultado">
@@ -176,7 +198,7 @@
       <a href="" class="modall__close" id="cerrarModal">Cerrar</a>
     </div>
   </section>
-  <script type="module" src="/Alumnos.js"></script>
+  <script src="/Alumnos.js"></script>
 </body>
 
 </html>

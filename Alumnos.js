@@ -1,5 +1,90 @@
-// const fs = require('fs')
+//Login
+//En primera medida capturamos todo lo necesario para trabajar tanto con el modal
+//como con los datos de nuestros input
 
+let dialog = document.querySelector('dialog')
+let loginUser = document.getElementById('loginUser')
+let logout = document.getElementById('logout')
+let cancel = document.getElementById('cancel')
+let containerLogin = document.getElementById('containerLogin')
+let init = document.getElementById('init')
+let inicioSesion = document.getElementById('inicioSesion')
+let user = document.getElementById('user')
+let password = document.getElementById('password')
+
+//Comenzamos con el click en el link de iniciar sesion, en el mismo vamos a mostrar nuestro 
+//modal que esta escondido y si deseamos cerrarlo, simplemente lo ocultamos.
+loginUser.addEventListener('click', ()=> {
+    dialog.showModal()
+    containerLogin.classList.add('modalLogin')
+
+})
+cancel.addEventListener('click', ()=> {
+    containerLogin.classList.remove('modalLogin')
+    dialog.close()
+})
+
+//El inicio de sesion se basa en una promesa asincrona, en la cual, el usuario administrador
+//va a hacer click primero en iniciar sesión y luego llenara los input con dos valores 
+// que son por defecto admin y admin, en el mismo lo lógica de programación es la siguiente:
+// capturamos los valores de los input user y password, y los sometemos a una promesa 
+// con un condicional, en la promesa que nos trae de nuestra simulación de base de datos
+// los valores de "user" y de "password" que al ser sometidos al condicional 
+//de igualdad estricta en caso de ser verdadero:
+// 1)Elimina el bloqueo de uso del simulador
+// 2) Va a ocular la opción de inicio de sesión porque no tendria sentido que siga apareciendo
+// 3) Va a mostrar la opción de cerrar la sesion
+// 4) Eliminara la clase que hacer que el modal de login bloquee toda interación
+// 5) Cierra el modal
+
+// En caso de resultar falso, se notifica al usuario de su error
+
+inicioSesion.addEventListener('click', ()=>{
+    
+    let userValue = user.value
+    let passwordValue = password.value
+
+    async function login(){
+        const url = '/usuario.json'
+        const res = await fetch(url)
+        const data = await res.json()
+        if ((userValue === data[0].user) && (passwordValue === data[0].password)) {
+            init.classList.remove('init')
+            loginUser.setAttribute('hidden', "")
+            logout.removeAttribute('hidden', "")
+            containerLogin.classList.remove('modalLogin')
+            Swal.fire({
+                icon: 'success',
+                title: 'Inicio correcto',
+                timer: 1500,
+            })
+            dialog.close()
+            document.getElementById('formularioLogin').reset()
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Usuario y contraseña incorrecto',
+                timer: 2000,
+            })
+            dialog.close()
+            document.getElementById('formularioLogin').reset()
+        }
+    }
+    login()
+})
+
+// Una vez que se simulo el inicio de sesión, aparece la opción de salir, con lo cual
+// hace lo contrario al punto anterior:
+// 1) Remueve el atributo hidden de iniciar sesión
+// 2) Le agrega el atributo hidden al logout
+// 3) Y vuelve a agregar las clases de inicio y modal del login
+
+logout.addEventListener('click', ()=>{
+    loginUser.removeAttribute('hidden', "")
+    logout.setAttribute('hidden', "")
+    init.classList.add('init')
+    containerLogin.classList.add('modalLogin')
+})
 
 class Alumnos {
     constructor() {
@@ -31,38 +116,21 @@ const alumnosLista = [];
 
 
 
-// Creo una variable para guardar todo lo contenido en el localStorage
-let listaProvisoria = localStorage.getItem('alumnosLista')
-
-
 //Variable para escribir en el DOM
-let listaGuardada = []
-
-//Pusheo en la variable con spread para poder usar varios push y que se vayan sumando los objetos y no borrando lo que ya tengo cargado, pero ahora esto hay que llevarlo al boton de guardar
-listaGuardada.push(...JSON.parse(listaProvisoria))
-
-
-
-
-// let probamos = listaGuardada.split(coma)
-// console.log(probamos);
-
+let listaGuardada = localStorage.getItem('alumnosLista')
+escribirGuardados()
 console.log(listaGuardada);
 
 
 //Ahora compruebo que listaGuardada contenga información de cargas anteriores, en caso positivo, debo
 //separar el array en cada objeto y esos objetos a su vez iterarlos para poder escribirlos en el DOM
 
+function escribirGuardados(){
+let listaGuardada = localStorage.getItem('alumnosLista')
 if (listaGuardada) {
-    // listaGuardada = JSON.parse(listaGuardada)
+    listaGuardada = JSON.parse(listaGuardada)
 
     for (let i = 0; i < listaGuardada.length; i++) {
-
-        //Antes de continuar, creamos un salto 
-
-        let salto = document.getElementById('alumnosCargados')
-        let ul0 = document.createElement('ul')
-        salto.appendChild(ul0)
 
         // Creamos por cada elemento un lugar para su escritura
         //Primero creamos el ID que identificara a cada alumno 
@@ -70,7 +138,7 @@ if (listaGuardada) {
         let id = 1;
 
 
-        let idAlumno = document.getElementById('alumnosCargados')
+        let idAlumno = document.getElementById('alumnosGuardados')
         let ul = document.createElement('ul')
         idAlumno.appendChild(ul)
         ul.classList.add('col-sm')
@@ -89,7 +157,7 @@ if (listaGuardada) {
         //Segundo con el nombre
 
 
-        let nombresGuardados = document.getElementById('alumnosCargados')
+        let nombresGuardados = document.getElementById('alumnosGuardados')
         let ul1 = document.createElement('ul')
         nombresGuardados.appendChild(ul1)
         ul1.classList.add('col-sm')
@@ -106,7 +174,7 @@ if (listaGuardada) {
         //Tercero con el apellido
 
 
-        let apellidosGuardados = document.getElementById('alumnosCargados')
+        let apellidosGuardados = document.getElementById('alumnosGuardados')
         let ul2 = document.createElement('ul')
         apellidosGuardados.appendChild(ul2)
         ul2.classList.add('col-sm')
@@ -122,7 +190,7 @@ if (listaGuardada) {
 
         //Cuarto con las materias
 
-        let materiaGuardados = document.getElementById('alumnosCargados')
+        let materiaGuardados = document.getElementById('alumnosGuardados')
         let ul3 = document.createElement('ul')
         materiaGuardados.appendChild(ul3)
         ul3.classList.add('col-sm')
@@ -138,7 +206,7 @@ if (listaGuardada) {
 
         //Quinto con la primer nota del parcial
 
-        let primerGuardados = document.getElementById('alumnosCargados')
+        let primerGuardados = document.getElementById('alumnosGuardados')
         let ul4 = document.createElement('ul')
         primerGuardados.appendChild(ul4)
         ul4.classList.add('col-sm')
@@ -155,7 +223,7 @@ if (listaGuardada) {
 
         //Sexto con la segunda nota del parcial
 
-        let segundoGuardados = document.getElementById('alumnosCargados')
+        let segundoGuardados = document.getElementById('alumnosGuardados')
         let ul5 = document.createElement('ul')
         segundoGuardados.appendChild(ul5)
         ul5.classList.add('col-sm')
@@ -172,7 +240,7 @@ if (listaGuardada) {
 
         //Sexto con la tercer y ultima nota del parcial
 
-        let terceroGuardados = document.getElementById('alumnosCargados')
+        let terceroGuardados = document.getElementById('alumnosGuardados')
         let ul6 = document.createElement('ul')
         terceroGuardados.appendChild(ul6)
         ul6.classList.add('col-sm')
@@ -194,7 +262,7 @@ if (listaGuardada) {
         let notaTotal = listaGuardada[i].nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
         let promedio = notaTotal / 3
 
-        let promedioGuardados = document.getElementById('alumnosCargados')
+        let promedioGuardados = document.getElementById('alumnosGuardados')
         let ul7 = document.createElement('ul')
         promedioGuardados.appendChild(ul7)
         ul7.classList.add('col-sm')
@@ -221,7 +289,7 @@ if (listaGuardada) {
         // Por ultimo, escribimos los alumnos cargados y guardados en el localStorage
 
 
-        let estadoGuardados = document.getElementById('alumnosCargados')
+        let estadoGuardados = document.getElementById('alumnosGuardados')
         let ul8 = document.createElement('ul')
         estadoGuardados.appendChild(ul8)
         ul8.classList.add('col-sm')
@@ -240,14 +308,14 @@ if (listaGuardada) {
         //crear un salto de linea, así cada iteración se escribe una bajo la otra
 
 
-        let salto2 = document.getElementById('alumnosCargados')
+        let salto2 = document.getElementById('alumnosGuardados')
         let u9 = document.createElement('ul')
         salto2.appendChild(u9)
 
     }
 
 }
-
+}
 
 
 
@@ -261,13 +329,6 @@ btnAlumno.addEventListener('click', (e) => {
     if ((nombre.value !== '') && (apellido.value !== '') && (materia.value !== '') && (nota1.value !== '') && (nota2.value !== '') && (nota3.value !== '')) {
 
         e.preventDefault()
-
-        nombre.classList.remove('invalid')
-        apellido.classList.remove('invalid')
-        materia.classList.remove('invalid')
-        nota1.classList.remove('invalid')
-        nota2.classList.remove('invalid')
-        nota3.classList.remove('invalid')
 
 
         const alumno1 = new Alumnos()
@@ -304,9 +365,7 @@ btnAlumno.addEventListener('click', (e) => {
 
         let alumnoContainer = document.getElementById('alumnos')
         let divAlumnoContainer = document.createElement('div')
-        divAlumnoContainer.classList.add('row')
-        divAlumnoContainer.classList.add('m-0')
-        divAlumnoContainer.classList.add('p-0')
+        divAlumnoContainer.classList.add('row', 'm-0', 'p-0')
         divAlumnoContainer.setAttribute('id', `${idAlumno + 1}`)
         alumnoContainer.appendChild(divAlumnoContainer)
 
@@ -314,10 +373,6 @@ btnAlumno.addEventListener('click', (e) => {
         console.log(alumnoContainer);
 
         idAlumno++
-
-
-
-        console.log(idAlumno);
 
         // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
 
@@ -332,13 +387,28 @@ btnAlumno.addEventListener('click', (e) => {
             ul1.classList.add('col-sm')
             ul1.classList.add('border')
             ul1.classList.add('border-secondary')
+            let btnDelete = document.createElement('button')
+            let btnTxt = document.createTextNode('eliminar')
+            btnDelete.classList.add('col-sm','items', 'btn', 'btn-danger', 'ms-4')
+            btnDelete.appendChild(btnTxt)
+            ul1.appendChild(btnDelete)
+
+
+
             let li1 = document.createElement('li')
             let li1Text = document.createTextNode(alumnosLista.length)
             li1.appendChild(li1Text)
             ul1.appendChild(li1)
-            li1.classList.add('col-sm')
-            li1.classList.add('items')
+            li1.classList.add('col-sm', 'items')
             li1.setAttribute('id', `idTemporal${idAlumno}`)
+            li1.setAttribute('hidden', '')
+
+            btnDelete.onclick = function (){
+                document.getElementById(`${idAlumno}`).innerHTML=""
+                idAlumno -= 1
+                alumnosLista.pop()
+            }
+            
 
             // Primer For con la intención de escribir los datos obtenidos en los primeros 3 input
             // cuyos valores son el nombre, apellido y materia del alumno
@@ -349,16 +419,14 @@ btnAlumno.addEventListener('click', (e) => {
                 let nuevaLista = document.getElementById(`${idAlumno}`)
                 let ul = document.createElement('ul')
                 nuevaLista.appendChild(ul)
-                ul.classList.add('col-sm')
-                ul.classList.add('border')
-                ul.classList.add('border-secondary')
+                ul.classList.add('col-sm', 'border', 'border-secondary')
+
 
                 let li = document.createElement('li')
                 let liText = document.createTextNode(valores[i])
                 li.appendChild(liText)
                 ul.appendChild(li)
-                li.classList.add('col-sm')
-                li.classList.add('items')
+                li.classList.add('col-sm', 'items')
 
             }
 
@@ -370,17 +438,13 @@ btnAlumno.addEventListener('click', (e) => {
                 let nuevaLista = document.getElementById(`${idAlumno}`)
                 let ul = document.createElement('ul')
                 nuevaLista.appendChild(ul)
-                ul.classList.add('col-sm')
-                ul.classList.add('border')
-                ul.classList.add('border-secondary')
-
+                ul.classList.add('col-sm', 'border', 'border-secondary')
 
                 let li = document.createElement('li')
                 let liText = document.createTextNode(elemento)
                 li.appendChild(liText)
                 ul.appendChild(li)
-                li.classList.add('col-sm')
-                li.classList.add('items')
+                li.classList.add('col-sm', 'items')
             }
 
 
@@ -406,28 +470,19 @@ btnAlumno.addEventListener('click', (e) => {
 let btnGuardar = document.getElementById('btnGuardar')
 
 btnGuardar.addEventListener('click', () => {
-    // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y refrescamos la pagina
+    // GUARDO LOS ALUMNOS EN EL LOCAL STORAGE BAJO UN MISMO ID y escribimos el DOM
 
     localStorage.setItem('alumnosLista', JSON.stringify(alumnosLista))
-    // guardarElementos()
-    window.location.reload();
-
+    let alumnosCargados = document.querySelector('.alumnosCargados')
+    let divAlumnosCargados = alumnosCargados.querySelectorAll('div')
+    let cantidad = divAlumnosCargados.length
+    let alumnosGuardados = document.getElementById('alumnosGuardados')
+    for(i = 0; i< cantidad; i++){
+        document.getElementById(`${i+1}`).innerHTML=""
+    }
+    alumnosGuardados.innerHTML=''
+    escribirGuardados()
 })
-
-/*
-function guardarElementos() {
-    let guardarLista = JSON.parse(localStorage.getItem('alumnosLista'))
-    console.log('lo guardado en guardarLista es: ' + guardarLista);
-
-    listaGuardada.push(...guardarLista)
-
-    console.log('lo guardado en listaGuardada es: ' + listaGuardada);
-
-    // const listaGuardadaStringify = JSON.stringify(listaGuardada)
-    
-    fs.writeFileSync('/src/carga.json', listaGuardada, 'utf-8')
-}
-*/
 
 
 //Funcionalidad del buscador, el mismo será por nombre y/o apellido
@@ -482,70 +537,46 @@ buscador.addEventListener('click', (e) => {
                 let modallContainer = document.getElementById('modallContainer')
                 let ul1 = document.createElement('ul')
                 modallContainer.appendChild(ul1)
-                ul1.classList.add('col-sm')
-                ul1.classList.add('border')
-                ul1.classList.add('border-success')
-                ul1.classList.add('modall__paragraph')
-                ul1.classList.add('p-1')
-                ul1.classList.add('m-0')
+                ul1.classList.add('col-sm', 'border', 'border-success', 'modall__paragraph', 'p-1','m-0')
 
                 let li1 = document.createElement('li')
                 let li1text = document.createTextNode(`Nombre: ${alumno.nombre}`)
                 li1.appendChild(li1text)
                 ul1.appendChild(li1)
-                li1.classList.add('col-sm')
-                li1.classList.add('items')
-
+                li1.classList.add('col-sm', 'items')
 
                 let ul2 = document.createElement('ul')
                 modallContainer.appendChild(ul2)
-                ul2.classList.add('col-sm')
-                ul2.classList.add('border-top')
-                ul2.classList.add('border-bottom')
-                ul2.classList.add('border-success')
-                ul2.classList.add('modall__paragraph')
-                ul2.classList.add('p-1')
-                ul2.classList.add('m-0')
+                ul2.classList.add('col-sm', 'border-top', 'border-bottom', 'border-success', 'modall__paragraph', 'p-1', 'm-0')
+
 
                 let li2 = document.createElement('li')
                 let li2text = document.createTextNode(`Apellido: ${alumno.apellido}`)
                 li2.appendChild(li2text)
                 ul2.appendChild(li2)
-                li2.classList.add('col-sm')
-                li2.classList.add('items')
+                li2.classList.add('col-sm', 'items')
 
                 let ul3 = document.createElement('ul')
                 modallContainer.appendChild(ul3)
-                ul3.classList.add('col-sm')
-                ul3.classList.add('border')
-                ul3.classList.add('border-success')
-                ul3.classList.add('modall__paragraph')
-                ul3.classList.add('p-1')
-                ul3.classList.add('m-0')
+                ul3.classList.add('col-sm', 'border', 'border-success', 'modall__paragraph', 'p-1', 'm-0')
+
 
                 let li3 = document.createElement('li')
                 let li3text = document.createTextNode(`Materia: ${alumno.materia}`)
                 li3.appendChild(li3text)
                 ul3.appendChild(li3)
-                li3.classList.add('col-sm')
-                li3.classList.add('items')
+                li3.classList.add('col-sm', 'items')
+
 
                 let ul4 = document.createElement('ul')
                 modallContainer.appendChild(ul4)
-                ul4.classList.add('col-sm')
-                ul4.classList.add('border-top')
-                ul4.classList.add('border-bottom')
-                ul4.classList.add('border-success')
-                ul4.classList.add('modall__paragraph')
-                ul4.classList.add('p-1')
-                ul4.classList.add('m-0')
+                ul4.classList.add('col-sm', 'border-top', 'border-bottom', 'border-success', 'modall__paragraph', 'p-1', 'm-0')
 
                 let li4 = document.createElement('li')
                 let li4text = document.createTextNode(`Promedio: ${promedio.toFixed(2)}`)
                 li4.appendChild(li4text)
                 ul4.appendChild(li4)
-                li4.classList.add('col-sm')
-                li4.classList.add('items')
+                li4.classList.add('col-sm', 'items')
 
                 //Resultado es el estado en que se encuentra la materia, se realiza mediante un ternario
 
@@ -555,19 +586,14 @@ buscador.addEventListener('click', (e) => {
 
                 let ul5 = document.createElement('ul')
                 modallContainer.appendChild(ul5)
-                ul5.classList.add('col-sm')
-                ul5.classList.add('border')
-                ul5.classList.add('border-success')
-                ul5.classList.add('modall__paragraph')
-                ul5.classList.add('p-1')
-                ul5.classList.add('m-0')
+                ul5.classList.add('col-sm', 'border', 'border-success', 'modall__paragraph', 'p-1', 'm-0')
+
 
                 let li5 = document.createElement('li')
                 let li5text = document.createTextNode(`Estado: ${resultado}`)
                 li5.appendChild(li5text)
                 ul5.appendChild(li5)
-                li5.classList.add('col-sm')
-                li5.classList.add('items')
+                li5.classList.add('col-sm', 'items')
 
                 //Agregamos un elemento más para realizar un salto
 
@@ -619,6 +645,11 @@ btnEliminarUltimo.addEventListener('click', () => {
             Swal.fire({
                 title: '¡Alumno borrado!',
                 icon: 'success',
+            })
+        }else{
+            Swal.fire({
+                title: '¡No hay alumno para eliminar!',
+                icon: 'alert',
             })
         }
     })
