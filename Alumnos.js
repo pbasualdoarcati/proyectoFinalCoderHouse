@@ -403,10 +403,10 @@ btnAlumno.addEventListener('click', (e) => {
             li1.setAttribute('id', `idTemporal${idAlumno}`)
             li1.setAttribute('hidden', '')
 
-            btnDelete.onclick = function (){
-                document.getElementById(`${idAlumno}`).innerHTML=""
-                idAlumno -= 1
-                alumnosLista.pop()
+            btnDelete.onclick = (e)=>{
+               let prueba = e.target.parentNode.parentNode.id;
+               document.getElementById(prueba).innerHTML=""
+               alumnosLista.pop()
             }
             
 
