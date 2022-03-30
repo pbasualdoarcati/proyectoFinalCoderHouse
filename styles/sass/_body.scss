@@ -2,6 +2,17 @@ body{
     background-color: #3f3e3e;
     color: #fff;
 }
+.init{
+    background-color: #111111;
+    position: fixed;
+    z-index: 100;
+    top: 3.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    pointer-events:unset;
+}
 .login{
     position: relative;
     left: 44%;
@@ -103,9 +114,6 @@ body{
     margin: 0;
     padding: 0;
 }
-input:out-of-range{
-    border: 2px solid red
-}
-input:invalid{
-    border: 2px solid red
+.invalid{
+    border: 2px solid red;
 }

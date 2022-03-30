@@ -8,6 +8,18 @@ body {
   color: #fff;
 }
 
+.init {
+  background-color: #111111;
+  position: fixed;
+  z-index: 100;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
+  pointer-events: unset;
+}
+
 .login {
   position: relative;
   left: 44%;
@@ -113,11 +125,7 @@ body {
   padding: 0;
 }
 
-input:out-of-range {
-  border: 2px solid red;
-}
-
-input:invalid {
+.invalid {
   border: 2px solid red;
 }
 
@@ -171,6 +179,18 @@ input:invalid {
 
 .modall--show {
   opacity: 1;
+  pointer-events: unset;
+}
+
+.modalLogin {
+  background-color: #111111;
+  position: fixed;
+  z-index: 100;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
   pointer-events: unset;
 }
 
