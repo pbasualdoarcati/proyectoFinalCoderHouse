@@ -500,19 +500,18 @@ buscador.addEventListener('click', (e) => {
 
     let alumnoBuscar = inputSearch.value
     let contador = 0
+    let listado= JSON.parse(listaGuardada)
 
 
-
-    for (let i in listaGuardada) {
-        let alumno = listaGuardada[i]
+    for (let i in listado) {
+        let alumno = listado[i]
         let nombreAlumno = alumno.nombre.toLowerCase()
         let apellidoAlumno = alumno.apellido.toLowerCase()
-
 
         if ((alumnoBuscar.length != 0 && nombreAlumno.length != 0)) {
             if (((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1)) {
                 contador += 1
-
+                console.log(contador);
                 //Creamos un contenedor que luego usaremos para eliminar y limpiar los resultados sin tener que refrescar la pantalla
 
                 let divModalContainer = document.createElement('div')
@@ -523,8 +522,13 @@ buscador.addEventListener('click', (e) => {
 
 
                 //Titulo del modal
-                let text = document.getElementById('titleDefault').innerText
-                titleDefault.innerText = 'Alumno encontrado:'
+                if((contador === 1)){
+                    let text = document.getElementById('titleDefault')
+                    text.innerText = 'Alumno encontrado:'
+                }else{
+                    let text = document.getElementById('titleDefault')
+                    text.innerText = 'Alumnos encontrados:'
+                }
 
                 //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
 
@@ -620,7 +624,7 @@ cerrarModal.addEventListener('click', (e) => {
     modalResultado.classList.remove('modall--show')
     let divContenedor = document.getElementById('modallContainer')
     inputSearch.value = ''
-    divContenedor.outerHTML = ''
+    divContenedor.outerHTML=""
 
 })
 
@@ -639,7 +643,7 @@ btnEliminarUltimo.addEventListener('click', () => {
         cancelButtonText: 'No',
     }).then((result) => {
         if (result.isConfirmed) {
-            document.getElementById(`${idAlumno}`).outerHTML = ''
+            document.getElementById(`${idAlumno}`).innerHTML=""
             idAlumno -= 1
             alumnosLista.pop()
             Swal.fire({
