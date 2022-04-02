@@ -119,16 +119,15 @@ const alumnosLista = [];
 //Variable para escribir en el DOM
 let listaGuardada = localStorage.getItem('alumnosLista')
 escribirGuardados()
-console.log(listaGuardada);
+
 
 
 //Ahora compruebo que listaGuardada contenga información de cargas anteriores, en caso positivo, debo
 //separar el array en cada objeto y esos objetos a su vez iterarlos para poder escribirlos en el DOM
 
 function escribirGuardados(){
-let listaGuardada = localStorage.getItem('alumnosLista')
+let listaGuardada = JSON.parse(localStorage.getItem('alumnosLista'))
 if (listaGuardada) {
-    listaGuardada = JSON.parse(listaGuardada)
 
     for (let i = 0; i < listaGuardada.length; i++) {
 
@@ -259,7 +258,7 @@ if (listaGuardada) {
         //divido 3 que son las cantidades de notas ingresadas y creamos los elementos
         //para escribirlo en el DOM
 
-        let notaTotal = listaGuardada[i].nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
+        let notaTotal = parseInt(listaGuardada[i].nota[0])+ parseInt(listaGuardada[i].nota[1])+parseInt(listaGuardada[i].nota[2])
         let promedio = notaTotal / 3
 
         let promedioGuardados = document.getElementById('alumnosGuardados')
@@ -334,8 +333,6 @@ btnAlumno.addEventListener('click', (e) => {
         const alumno1 = new Alumnos()
         alumno1.agregarAlumnos()
         alumnosLista.push(alumno1)
-        console.log('agregarAlumnos() : ', alumno1); //Realizamos un console.log para saber que es lo que estamos obteniendo
-        console.log('alumnosLista[] : ', alumnosLista); //Realizamos un console.log para saber que es lo que estamos obteniendo
 
         //Aqui vamos a capturar los valores de manera separada para tratarlos en los for de manera 
         //independiente ya que el segundo valor nos devuelve una matriz que luego debemos separarla
@@ -343,7 +340,6 @@ btnAlumno.addEventListener('click', (e) => {
 
         let valores = Object.values(alumno1)
         let valoresArray = [Object.values(alumno1.nota)]
-        console.log('valoresArray: ', valoresArray);//Realizamos un console.log para saber que es lo que estamos obteniendo
 
         //Aqui vamos a aplicar el promedio en base a los valores ingresados por el usuario en los input 
         //de Notas y lo pusheamos al array
@@ -369,9 +365,6 @@ btnAlumno.addEventListener('click', (e) => {
         divAlumnoContainer.setAttribute('id', `${idAlumno + 1}`)
         alumnoContainer.appendChild(divAlumnoContainer)
 
-        console.log(divAlumnoContainer);
-        console.log(alumnoContainer);
-
         idAlumno++
 
         // Guardamos las iteraciones de los nuevos alumnos ingresados en una funcion, para así poder cargar varios
@@ -384,16 +377,17 @@ btnAlumno.addEventListener('click', (e) => {
 
             let ul1 = document.createElement('ul')
             nuevaLista.appendChild(ul1)
-            ul1.classList.add('col-sm')
-            ul1.classList.add('border')
-            ul1.classList.add('border-secondary')
-            let btnDelete = document.createElement('button')
-            let btnTxt = document.createTextNode('eliminar')
-            btnDelete.classList.add('col-sm','items', 'btn', 'btn-danger', 'ms-4')
-            btnDelete.appendChild(btnTxt)
+            ul1.classList.add('col-sm', 'border', 'border-secondary', 'd-flex')
+
+            let btnDelete = document.createElement('a')
+            btnDelete.innerHTML = `<span class="material-icons">delete</span>`
+            btnDelete.classList.add('col-sm','items', 'btn', 'btn-danger', 'material-icons')
             ul1.appendChild(btnDelete)
 
-
+            let btnEdit = document.createElement('a')
+            btnEdit.innerHTML= `<span class="material-icons">mode_edit</span>`
+            btnEdit.classList.add ('col-sm', 'items', 'btn', 'btn-success', 'material-icons')
+            ul1.appendChild(btnEdit)
 
             let li1 = document.createElement('li')
             let li1Text = document.createTextNode(alumnosLista.length)
@@ -404,9 +398,218 @@ btnAlumno.addEventListener('click', (e) => {
             li1.setAttribute('hidden', '')
 
             btnDelete.onclick = (e)=>{
-               let prueba = e.target.parentNode.parentNode.id;
-               document.getElementById(prueba).innerHTML=""
+               let btnDeleteAlumno = e.target.parentNode.parentNode.parentNode.id;
+               document.getElementById(btnDeleteAlumno).innerHTML=""
                alumnosLista.pop()
+            }
+
+            btnEdit.onclick = (e)=>{
+                //Declaramos las variables que usaremos
+                let btnEditId = e.target.parentNode.parentNode.parentNode.id;
+
+                let btnFirstElement =e.target.parentNode.parentNode.parentNode
+                let btnEditar= btnFirstElement.firstChild
+                let btnEditName= btnEditar.nextSibling
+                let btnEditNombre = btnEditName.firstChild
+                let btnEditSurname= btnEditName.nextSibling
+                let btnEditApellido= btnEditSurname.firstChild
+                let btnEditSubject = btnEditSurname.nextSibling
+                let btnEditMateria = btnEditSubject.firstChild
+                let btnEditSujectOne = btnEditSubject.nextSibling
+                let btnEditMateria1= btnEditSujectOne.firstChild
+                let btnEditSubjectTwo=btnEditSujectOne.nextSibling
+                let btnEditMateria2 = btnEditSubjectTwo.firstChild
+                let btnEditSubjectThree=btnEditSubjectTwo.nextSibling
+                let btnEditMateria3 = btnEditSubjectThree.firstChild
+                let btnEditAverage = btnEditSubjectThree.nextSibling
+                let btnEditPromedio =btnEditAverage.firstChild
+                let btnEditState =btnEditAverage.nextSibling
+                let btnEditEstado = btnEditState.firstChild
+
+               
+                //Ocultar botones
+                btnDelete.setAttribute('hidden', '')
+                btnEdit.setAttribute('hidden', '')
+
+                //Mostrar botones de confirmar y cancelar
+                let btnConfirm = document.createElement('a')
+                btnConfirm.innerHTML= `<span class="material-icons">done</span>`
+                btnConfirm.classList.add ('col-sm', 'items', 'btn', 'btn-success', 'material-icons')
+                btnEditar.appendChild(btnConfirm)
+
+                let btnCancel = document.createElement('a')
+                btnCancel.innerHTML= `<span class="material-icons">close</span>`
+                btnCancel.classList.add ('col-sm', 'items', 'btn', 'btn-danger', 'material-icons')
+                btnEditar.appendChild(btnCancel)
+
+                //Input en Nombre
+                let inputName = document.createElement('input')
+                inputName.classList.add('container')
+                inputName.setAttribute('require', '')
+                inputName.setAttribute('minlength', '3')
+                inputName.setAttribute('maxlength', '25')
+                btnEditName.appendChild(inputName)
+                btnEditNombre.setAttribute('hidden', '')
+
+                //Input en Apellido
+                let inputSurname = document.createElement('input')
+                inputSurname.classList.add('container')
+                inputSurname.setAttribute('required', '')
+                inputSurname.setAttribute('minlength', '3')
+                inputSurname.setAttribute('maxlength', '25')
+                btnEditSurname.appendChild(inputSurname)
+                btnEditApellido.setAttribute('hidden', '')
+
+                //Input en Materia
+                let inputSubject = document.createElement('input')
+                inputSubject.classList.add('container')
+                inputSubject.setAttribute('required', '')
+                inputSubject.setAttribute('minlength', '3')
+                inputSubject.setAttribute('maxlength', '25')
+                btnEditSubject.appendChild(inputSubject)
+                btnEditMateria.setAttribute('hidden', '')
+
+                //Input en Nota primer parcial
+                let inputNota1 = document.createElement('input')
+                inputNota1.classList.add('container')
+                inputNota1.setAttribute('min', '1')
+                inputNota1.setAttribute('max', '10')
+                inputNota1.setAttribute('pattern', '[0-9]')
+                inputNota1.setAttribute('required', '')
+                btnEditSujectOne.appendChild(inputNota1)
+                btnEditMateria1.setAttribute('hidden', '')
+
+                //Input en Nota segundo parcial
+                let inputNota2 = document.createElement('input')
+                inputNota2.classList.add('container')
+                inputNota2.setAttribute('min', '1')
+                inputNota2.setAttribute('max', '10')
+                inputNota2.setAttribute('pattern', '[0-9]')
+                inputNota2.setAttribute('required', '')
+                btnEditSubjectTwo.appendChild(inputNota2)
+                btnEditMateria2.setAttribute('hidden', '')
+
+                //Input en Nota tercer parcial
+                let inputNota3 = document.createElement('input')
+                inputNota3.classList.add('container')
+                inputNota3.setAttribute('min', '1')
+                inputNota3.setAttribute('max', '10')
+                inputNota3.setAttribute('pattern', '[0-9]')
+                inputNota3.setAttribute('required', '')
+                btnEditSubjectThree.appendChild(inputNota3)
+                btnEditMateria3.setAttribute('hidden', '')
+
+
+                //Funcionalidad boton cancel
+                btnCancel.onclick = ()=>{
+                    //Mostrar botones y ocultar los de confirmar y cancelar
+                    btnDelete.removeAttribute('hidden', '')
+                    btnEdit.removeAttribute('hidden', '')
+                    btnConfirm.setAttribute('hidden', '')
+                    btnCancel.setAttribute('hidden', '')
+
+                    //Mostrar valores cargados previamente y ocular input
+                    btnEditNombre.removeAttribute('hidden', '')
+                    btnEditApellido.removeAttribute('hidden', '')
+                    btnEditMateria.removeAttribute('hidden', '')
+                    btnEditMateria1.removeAttribute('hidden', '')
+                    btnEditMateria2.removeAttribute('hidden', '')
+                    btnEditMateria3.removeAttribute('hidden', '')
+
+                    inputName.setAttribute('hidden', '')
+                    inputSurname.setAttribute('hidden', '')
+                    inputSubject.setAttribute('hidden', '')
+                    inputNota1.setAttribute('hidden', '')
+                    inputNota2.setAttribute('hidden', '')
+                    inputNota3.setAttribute('hidden', '')
+                }
+
+                //Funcionalidad boton confirm
+                btnConfirm.onclick= ()=>{
+                    if((inputName.value!=='') || (inputSurname.value!=='') || (inputSubject.value!=='') || (inputNota1.value!=='') || (inputNota2.value!=='') || (inputNota3.value!=='')){
+                        //Elimina la clase invalid
+                        inputName.classList.remove('invalid')
+                        inputSurname.classList.remove('invalid')
+                        inputSubject.classList.remove('invalid')
+                        inputNota1.classList.remove('invalid')
+                        inputNota2.classList.remove('invalid')
+                        inputNota3.classList.remove('invalid')
+
+                        //Capturamos los valores de los input
+                        let inputNameValue=inputName.value
+                        let inputSurnameValue=inputSurname.value
+                        let inputSubjectValue=inputSubject.value
+                        let inputNota1Value=inputNota1.value
+                        let inputNota2Value=inputNota2.value
+                        let inputNota3Value=inputNota3.value
+
+                        //Logica del promedio y del estado de la materia
+
+                        let promedio = (parseInt(inputNota1.value)+parseInt(inputNota2.value)+parseInt(inputNota3.value))/3
+
+                        let resultado
+
+                        promedio.toFixed(2) > 6 ? resultado = 'Aprobado' : resultado = 'Reprobado'
+                
+                        valoresArray.push(resultado)
+
+                        //Escribimos en el DOM
+
+                        btnEditNombre.innerText=inputNameValue
+                        btnEditApellido.innerText = inputSurnameValue
+                        btnEditMateria.innerText = inputSubjectValue
+                        btnEditMateria1.innerText = inputNota1Value
+                        btnEditMateria2.innerText = inputNota2Value
+                        btnEditMateria3.innerText = inputNota3Value
+                        btnEditPromedio.innerText = promedio.toFixed(2)
+                        btnEditEstado.innerText = resultado
+
+
+                        //Mostrar botones y ocultar los de confirmar y cancelar
+                        btnDelete.removeAttribute('hidden', '')
+                        btnEdit.removeAttribute('hidden', '')
+                        btnConfirm.setAttribute('hidden', '')
+                        btnCancel.setAttribute('hidden', '')
+
+                        //Mostrar nuevos valores cargados  y ocular input
+                        btnEditNombre.removeAttribute('hidden', '')
+                        btnEditApellido.removeAttribute('hidden', '')
+                        btnEditMateria.removeAttribute('hidden', '')
+                        btnEditMateria1.removeAttribute('hidden', '')
+                        btnEditMateria2.removeAttribute('hidden', '')
+                        btnEditMateria3.removeAttribute('hidden', '')
+
+                        inputName.setAttribute('hidden', '')
+                        inputSurname.setAttribute('hidden', '')
+                        inputSubject.setAttribute('hidden', '')
+                        inputNota1.setAttribute('hidden', '')
+                        inputNota2.setAttribute('hidden', '')
+                        inputNota3.setAttribute('hidden', '')
+
+                        //Modifico el objeto:
+
+                        alumnosLista[btnEditId-1]={
+                            "nombre" : inputNameValue,
+                            "apellido" : inputSurnameValue,
+                            "materia" : inputSubjectValue,
+                            "nota": {
+                                "0":inputNota2Value,
+                                "1":inputNota1Value,
+                                "2":inputNota3Value
+                            }
+                        }
+
+                    }else{
+                        inputName.classList.add('invalid')
+                        inputSurname.classList.add('invalid')
+                        inputSubject.classList.add('invalid')
+                        inputNota1.classList.add('invalid')
+                        inputNota2.classList.add('invalid')
+                        inputNota3.classList.add('invalid')
+                    }
+
+                }
+
             }
             
 
@@ -414,7 +617,7 @@ btnAlumno.addEventListener('click', (e) => {
             // cuyos valores son el nombre, apellido y materia del alumno
 
             for (let i = 0; i < 3; i++) {
-                // console.log('for de nuevoAlumno() : ',valores[i]); //Realizamos un console.log para saber que es lo que estamos obteniendo
+
 
                 let nuevaLista = document.getElementById(`${idAlumno}`)
                 let ul = document.createElement('ul')
@@ -511,7 +714,6 @@ buscador.addEventListener('click', (e) => {
         if ((alumnoBuscar.length != 0 && nombreAlumno.length != 0)) {
             if (((nombreAlumno.search(alumnoBuscar.toLowerCase())) != -1) || ((apellidoAlumno.search(alumnoBuscar.toLowerCase())) != -1)) {
                 contador += 1
-                console.log(contador);
                 //Creamos un contenedor que luego usaremos para eliminar y limpiar los resultados sin tener que refrescar la pantalla
 
                 let divModalContainer = document.createElement('div')
@@ -532,7 +734,7 @@ buscador.addEventListener('click', (e) => {
 
                 //Realizamos la operación de iterar y sumar las notas y luego obtener el promedio
 
-                let notaTotal = alumno.nota.reduce((acc, el) => parseInt(acc) + parseInt(el))
+                let notaTotal = parseInt(alumno.nota[0])+parseInt(alumno.nota[1])+parseInt(alumno.nota[2])
                 let promedio = notaTotal / 3
 
 
@@ -617,8 +819,7 @@ buscador.addEventListener('click', (e) => {
 
 })
 
-
-
+//Cierre de modal
 cerrarModal.addEventListener('click', (e) => {
     e.preventDefault()
     modalResultado.classList.remove('modall--show')
@@ -657,7 +858,4 @@ btnEliminarUltimo.addEventListener('click', () => {
             })
         }
     })
-
-
-
 })
