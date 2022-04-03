@@ -48,6 +48,7 @@ A login and logout was implemented, which by default the username and password i
 external json file.
 
 The functionality of individually deleting the student loaded but not saved has been implemented.
+The functionality of editing the loaded student has been implemented.
 
 
 ![image](https://user-images.githubusercontent.com/87046340/158493074-077ff9c4-21f5-4f42-9261-2157f462a415.png)
