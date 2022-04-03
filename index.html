@@ -15,18 +15,20 @@
 
 <body>
   <!-- Barra de navegación -->
-  <div class="init" id="init"></div>
+  <div class="init" id="init">
+    <img src="/src/images/click.gif" alt="click aqui" class="click" id="imagenClick">
+  </div>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="http://www.coderhouse.com" target="_blank">
-        <img src="https://www.greatplacetowork.com.ar/images/coderhouse-logo.png" alt="" width="30" height="24">
+        <img src="/src/images/coderhouse-logo.png" alt="" width="30" height="24">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
           <li class="nav-item">
             <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
           </li>
@@ -38,12 +40,12 @@
 
                 <form action="" class="form-label d-block mt-2" id="formularioLogin">
                   <label for="user">Usuario
-                    <input type="text" class="form-control" id="user" title="Usuario admin">
+                    <input type="text" class="form-control" id="user" title="Usuario admin" placeholder="Usuario: admin">
                   </label>
 
 
-                  <label for="password">Contraseña
-                    <input type="password" class="form-control" id="password" title="Contraseña admin">
+                  <label for="password">Contraseña: admin
+                    <input type="password" class="form-control" id="password" title="Contraseña admin" placeholder="Contraseña: admin">
                   </label>
                 </form>
                 <div class="container d-flex flex-row justify-content-center p-2 bd-highlight">
@@ -201,4 +203,5 @@
   </section>
   <script src="/Alumnos.js"></script>
 </body>
+
 </html>

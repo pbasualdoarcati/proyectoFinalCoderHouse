@@ -11,6 +11,7 @@ let init = document.getElementById('init')
 let inicioSesion = document.getElementById('inicioSesion')
 let user = document.getElementById('user')
 let password = document.getElementById('password')
+let imagenClick = document.getElementById('imagenClick')
 
 //Comenzamos con el click en el link de iniciar sesion, en el mismo vamos a mostrar nuestro 
 //modal que esta escondido y si deseamos cerrarlo, simplemente lo ocultamos.
@@ -51,6 +52,7 @@ inicioSesion.addEventListener('click', ()=>{
         if ((userValue === data[0].user) && (passwordValue === data[0].password)) {
             init.classList.remove('init')
             loginUser.setAttribute('hidden', "")
+            imagenClick.setAttribute('hidden', '')
             logout.removeAttribute('hidden', "")
             containerLogin.classList.remove('modalLogin')
             Swal.fire({
@@ -81,6 +83,7 @@ inicioSesion.addEventListener('click', ()=>{
 
 logout.addEventListener('click', ()=>{
     loginUser.removeAttribute('hidden', "")
+    imagenClick.removeAttribute('hidden', '')
     logout.setAttribute('hidden', "")
     init.classList.add('init')
     containerLogin.classList.add('modalLogin')
