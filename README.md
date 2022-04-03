@@ -21,6 +21,7 @@ Se implemento un login y logout el cual por defecto el usuario y contraseña es 
 archivo json externo.
 
 Se implemento la funcionalidad de eliminar individualmente el alumno cargado pero no guardado.
+Se implemento la funcionalidad de editar el alumno cargado.
 
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -66,5 +67,11 @@ The functionality of individually deleting the student loaded but not saved has 
 ![eliminar3](https://user-images.githubusercontent.com/87046340/160740122-2349b97a-e27a-45de-b9ff-68b91bd13533.png)
 ![guardar2](https://user-images.githubusercontent.com/87046340/160740158-8896c948-4fdf-40d6-ba84-51198de59088.png)
 ![guardar3](https://user-images.githubusercontent.com/87046340/160740175-e6186858-b55e-40b8-9b3b-1dbe26134097.png)
+![edit1](https://user-images.githubusercontent.com/87046340/161405530-d57311f0-7321-4576-ae28-78c722a914e2.png)
+![edit2](https://user-images.githubusercontent.com/87046340/161405533-d8a13df3-d569-4485-9f2e-7ce009e8c25f.png)
+![edit3](https://user-images.githubusercontent.com/87046340/161405535-d9955b34-4f17-4b91-8ce0-588f7087ed09.png)
+![edit4](https://user-images.githubusercontent.com/87046340/161405543-50931a46-c9fc-44a6-b162-3398df68359b.png)
+![edit5](https://user-images.githubusercontent.com/87046340/161405544-f0ad44eb-eca7-4cac-bea2-25915d75c2d7.png)
+
 
 
