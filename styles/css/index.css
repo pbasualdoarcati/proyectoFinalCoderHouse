@@ -19,6 +19,12 @@ body {
   opacity: 0.5;
   pointer-events: unset;
 }
+.init .click {
+  width: 10%;
+  transform: rotate(-160deg);
+  position: relative;
+  left: 90%;
+}
 
 .login {
   position: relative;
