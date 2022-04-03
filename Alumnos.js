@@ -828,7 +828,7 @@ cerrarModal.addEventListener('click', (e) => {
     modalResultado.classList.remove('modall--show')
     let divContenedor = document.getElementById('modallContainer')
     inputSearch.value = ''
-    divContenedor.outerHTML=""
+    divContenedor.innerHTML=""
 
 })
 
