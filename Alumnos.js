@@ -833,7 +833,6 @@ cerrarModal.addEventListener('click', (e) => {
 
 let btnEliminarUltimo = document.getElementById('btnEliminarUltimo')
 
-
 btnEliminarUltimo.addEventListener('click', () => {
 
     Swal.fire({
