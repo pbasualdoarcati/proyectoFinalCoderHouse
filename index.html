@@ -45,7 +45,7 @@
                   </label>
 
 
-                  <label for="password">Contraseña: admin
+                  <label for="password">Contraseña
                     <input type="password" class="form-control" id="password" title="Contraseña admin" placeholder="Contraseña: admin">
                   </label>
                 </form>
@@ -56,7 +56,7 @@
               </dialog>
             </div>
             <a class="nav-link active text-light" aria-current="page" href="#" id="loginUser">Iniciar sesión</a>
-            <a class="nav-link active text-light" aria-current="page" href="#" id="logout" hidden>Log Out</a>
+            <a class="nav-link active text-light" aria-current="page" href="#" id="logout" hidden>Cerrar sesión</a>
           </li>
         </ul>
       </div>
@@ -114,8 +114,7 @@
         </div>
         <img src="/src/images/logo.png" alt="logo escuela" class="logo">
         <div class="button">
-          <button type="submit" class="btn btn-secondary rounded-pill m-2" id="btnAlumno">Agregar Alumno <br>Aplicar
-            resultado</button>
+          <button type="submit" class="btn btn-secondary rounded-pill m-2" id="btnAlumno">Agregar Alumno</button>
         </div>
       </form>
     </div>
@@ -124,8 +123,10 @@
     <br>
     <div class="container d-flex flex-row justify-content-between p-2 bd-highlight">
       <h4>Alumnos agregados recientemente sin guardar:</h4>
-      <button class="btn btn-secondary rounded-pill" id="btnGuardar">Guardar</button>
-      <button class="btn btn-secondary rounded-pill" id="btnEliminarUltimo">Eliminar ultimo ingresado</button>
+      <div>
+        <button class="btn btn-secondary rounded-pill" id="btnGuardar">Guardar</button>
+        <button class="btn btn-secondary rounded-pill" id="btnEliminarUltimo">Eliminar ultimo ingresado</button>
+      </div>
     </div>
     <div class="row m-2">
       <ul class="col-sm border border-secondary">
