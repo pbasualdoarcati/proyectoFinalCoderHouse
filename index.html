@@ -10,7 +10,7 @@
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <title>Sistema de Gestión de Alumnos</title>
 </head>
 
@@ -82,7 +82,7 @@
     <!-- Input para agregar alumnos -->
 
     <div class="container alumnos_subtitulo">
-      <form action="" class="alumnos_formulario" id="formularioAlumno">
+      <form action="" class="alumnos_formulario d-flex align-items-center" id="formularioAlumno">
         <div class="container alumnos_modulo1">
 
           <label for="nombre" class="form-label col-">Nombre del Alumno</label>
@@ -100,16 +100,16 @@
         </div>
         <div class="container alumnos_modulo2">
 
-          <label for="nota1" class="form-label col-">Nota del Primer parcial</label>
-          <input type="number" class="form-control col-" id="nota1" placeholder="Nota Primer parcial" min="1" max="10"
+          <label for="nota1" class="form-label col-">Nota del 1° parcial</label>
+          <input type="number" class="form-control col-" id="nota1" placeholder="Nota del 1° parcial" min="1" max="10"
             name="nota1" pattern="[0-9]" required>
 
-          <label for="nota2" class="form-label col-">Nota del Segundo parcial</label>
-          <input type="number" class="form-control col-" id="nota2" placeholder="Nota Segundo parcial" min="1" max="10"
+          <label for="nota2" class="form-label col-">Nota del 2° parcial</label>
+          <input type="number" class="form-control col-" id="nota2" placeholder="Nota del 2° parcial" min="1" max="10"
             name="nota2" pattern="[0-9]" required>
 
-          <label for="nota3" class="form-label col-">Nota del Tercer parcial</label>
-          <input type="number" class="form-control col-" id="nota3" placeholder="Nota Tercer parcial" min="1" max="10"
+          <label for="nota3" class="form-label col-">Nota del 3° parcial</label>
+          <input type="number" class="form-control col-" id="nota3" placeholder="Nota del 3° parcial" min="1" max="10"
             name="nota3" pattern="[0-9]" required>
         </div>
         <img src="/src/images/logo.png" alt="logo escuela" class="logo">

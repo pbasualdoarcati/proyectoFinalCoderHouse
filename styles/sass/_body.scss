@@ -22,6 +22,12 @@ body{
 .login{
     position: relative;
     left: 44%;
+    @media (max-width:1024px){
+        left: 0;
+    }
+    @media (max-width:950){
+        left: 0;
+    }
 }
 .title{
     display: flex;
@@ -98,17 +104,18 @@ body{
         width: 10%;
         position: absolute;
         left: 70%;
-        top: 12rem
+    }
+    @media (max-width:1024px){
+        flex-direction: column;
+        width: 100%;
+        .logo{
+            display: none;
+        }
     }
 }
 .alumnos{
     border: 1px solid black;
-}
-.button{
-    width: 14%;
-    position: absolute;
-    left: 51%;
-    top: 28%;
+
 }
 .itemsTitulo{
     position: relative;
